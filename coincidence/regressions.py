@@ -42,7 +42,7 @@ from domdf_python_tools.stringlist import StringList
 from domdf_python_tools.typing import PathLike
 from pytest_regressions.data_regression import DataRegressionFixture
 from pytest_regressions.file_regression import FileRegressionFixture
-from typing_extensions import Literal, Protocol
+from typing_extensions import Protocol, runtime_checkable
 
 __all__ = [
 		"check_file_output",
@@ -111,6 +111,7 @@ def check_file_output(
 	return check_file_regression(data, file_regression, extension, newline=newline, **kwargs)
 
 
+@runtime_checkable
 class SupportsAsDict(Protocol):
 	"""
 	:class:`typing.Protocol` for classes like :func:`collections.namedtuple` and :class:`typing.NamedTuple`
@@ -135,7 +136,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 			data_dict: Union[Sequence, SupportsAsDict, Mapping, MappingProxyType],
 			basename: Optional[str] = None,
 			fullpath: Optional[str] = None,
-			) -> Literal[True]:
+			):
 		"""
 		Checks ``data`` against a previously recorded version, or generates a new file.
 
@@ -154,12 +155,10 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 
 		if isinstance(data_dict, (OrderedDict, Counter, defaultdict, MappingProxyType, ChainMap)):
 			data_dict = dict(data_dict)
-		elif isinstance(data_dict, tuple) and hasattr(data_dict, "_asdict"):
+		elif isinstance(data_dict, SupportsAsDict):
 			data_dict = dict(data_dict._asdict())
 
 		super().check(data_dict, basename=basename, fullpath=fullpath)
-
-		return True
 
 
 @pytest.fixture()
