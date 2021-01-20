@@ -37,7 +37,7 @@ import random
 from contextlib import contextmanager
 from functools import lru_cache
 from itertools import chain, permutations
-from typing import Any, Iterator, List, Sequence
+from typing import Any, Iterator, List, Optional, Sequence
 
 # 3rd party
 import pytest
@@ -119,7 +119,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 					)
 
 		@classmethod
-		def now(cls, tz=None):
+		def now(cls, tz: Optional[datetime.timezone] = None):
 			return datetime.datetime.fromtimestamp(fixed_datetime.timestamp())
 
 	D.__name__ = "date"

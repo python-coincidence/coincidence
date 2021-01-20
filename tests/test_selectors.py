@@ -1,6 +1,7 @@
 # stdlib
 import platform
 import sys
+from typing import Tuple
 
 # 3rd party
 import pytest
@@ -34,7 +35,7 @@ def test_min_version():
 				pytest.param((3, 10), marks=only_version(3.10, "Success")),
 				]
 		)
-def test_only_version(py_version):
+def test_only_version(py_version: Tuple[int, int]):
 	if sys.version_info[:2] != py_version:
 		assert False  # noqa: PT015
 
