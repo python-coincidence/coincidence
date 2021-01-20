@@ -8,6 +8,7 @@ import pytest
 
 # this package
 from coincidence.selectors import (
+		max_version,
 		min_version,
 		not_macos,
 		not_pypy,
@@ -21,6 +22,11 @@ from coincidence.selectors import (
 
 @min_version((3, 4), reason="Failure")
 def test_min_version():
+	pass
+
+
+@max_version("4.10", reason="Failure")
+def test_max_version():
 	pass
 
 
