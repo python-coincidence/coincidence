@@ -37,7 +37,7 @@ import random
 from contextlib import contextmanager
 from functools import lru_cache
 from itertools import chain, permutations
-from typing import Any, Iterator, List, Optional, Sequence
+from typing import Iterable, Iterator, List, Optional, Sequence, TypeVar, Union
 
 # 3rd party
 import pytest
@@ -52,6 +52,8 @@ __all__ = [
 		"whitespace",
 		"whitespace_perms_list",
 		]
+
+_T = TypeVar("_T")
 
 _cgroup = PathPlus("/proc/self/cgroup")
 _dockerenv = "/.dockerenv"
@@ -137,19 +139,19 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 
 
 def generate_truthy_values(
-		extra_truthy: Sequence = (),
+		extra_truthy: Iterable[Union[str, int, _T]] = (),
 		ratio: float = 1,
-		) -> Iterator[Any]:
+		) -> Iterator[Union[str, int, _T]]:
 	"""
-	Returns an iterator of strings, integers and booleans that should be considered :py:obj:`True`.
+	Returns an iterator of strings, integers and booleans which should be considered :py:obj:`True`.
 
 	Optionally, a random selection of the values can be returned using the ``ratio`` argument.
 
-	:param extra_truthy: Additional values that should be considered :py:obj:`True`.
+	:param extra_truthy: Additional values which should be considered :py:obj:`True`.
 	:param ratio: The ratio of the number of values to select to the total number of values.
 	"""
 
-	truthy_values = [
+	truthy_values: Sequence[Union[str, int, _T]] = [
 			True,
 			"True",
 			"true",
@@ -173,17 +175,20 @@ def generate_truthy_values(
 	yield from truthy_values
 
 
-def generate_falsy_values(extra_falsy: Sequence = (), ratio: float = 1) -> Iterator[Any]:
+def generate_falsy_values(
+		extra_falsy: Iterable[Union[str, int, _T]] = (),
+		ratio: float = 1,
+		) -> Iterator[Union[str, int, _T]]:
 	"""
-	Returns an iterator of strings, integers and booleans that should be considered :py:obj:`False`.
+	Returns an iterator of strings, integers and booleans which should be considered :py:obj:`False`.
 
 	Optionally, a random selection of the values can be returned using the ``ratio`` argument.
 
-	:param extra_falsy: Additional values that should be considered :py:obj:`True`.
+	:param extra_falsy: Additional values which should be considered :py:obj:`True`.
 	:param ratio: The ratio of the number of values to select to the total number of values.
 	"""
 
-	falsy_values = [
+	falsy_values: Sequence[Union[str, int, _T]] = [
 			False,
 			"False",
 			"false",

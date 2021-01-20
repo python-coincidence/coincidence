@@ -11,7 +11,7 @@ import coincidence
 from coincidence.utils import generate_falsy_values, generate_truthy_values, with_fixed_datetime
 
 
-def test_generate_truthy():
+def test_generate_truthy_values():
 	random.seed(1234)
 
 	assert list(generate_truthy_values()) == [
@@ -52,7 +52,7 @@ def test_generate_truthy():
 	assert list(generate_truthy_values(ratio=0.3)) == ['1', "yes", "True", True]
 
 
-def test_generate_falsy():
+def test_generate_falsy_values():
 	random.seed(1234)
 
 	assert list(generate_falsy_values()) == [
