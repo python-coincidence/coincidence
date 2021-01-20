@@ -146,6 +146,7 @@ Installation
 	:caption: API Reference
 	:glob:
 
+	api/coincidence
 	api/*
 
 .. toctree::

@@ -1,5 +1,5 @@
-============
-coincidence
-============
+=====================
+:mod:`coincidence`
+=====================
 
 .. automodule:: coincidence

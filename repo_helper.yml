@@ -24,8 +24,12 @@ python_versions:
 
 classifiers:
  - 'Development Status :: 4 - Beta'
+ - 'Framework :: Pytest'
  - 'Intended Audience :: Developers'
  - 'Topic :: Software Development :: Libraries :: Python Modules'
+ - 'Topic :: Software Development :: Quality Assurance'
+ - 'Topic :: Software Development :: Testing'
+ - 'Topic :: Software Development :: Testing :: Unit'
 
 keywords:
  - utilities
@@ -36,6 +40,7 @@ keywords:
 
 sphinx_conf_epilogue:
  - toctree_plus_types.add("fixture")
+ - html_logo = "../coincidence.png"
 
 intersphinx_mapping:
  - "'pytest': ('https://docs.pytest.org/en/stable', None)"

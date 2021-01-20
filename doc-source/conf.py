@@ -135,3 +135,4 @@ autodoc_default_options = {
 		}
 
 toctree_plus_types.add("fixture")
+html_logo = "../coincidence.png"

@@ -26,8 +26,61 @@ Helper functions for pytest.
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# stdlib
+import datetime
+import sys
+
+# this package
+from coincidence.fixtures import fixed_datetime, original_datadir, tmp_pathplus
+from coincidence.params import count, testing_boolean_values, whitespace_perms
+from coincidence.regressions import (
+		AdvancedDataRegressionFixture,
+		SupportsAsDict,
+		advanced_data_regression,
+		check_file_output,
+		check_file_regression
+		)
+from coincidence.selectors import (
+		max_version,
+		min_version,
+		not_docker,
+		not_macos,
+		not_pypy,
+		not_windows,
+		only_docker,
+		only_macos,
+		only_pypy,
+		only_version,
+		only_windows,
+		platform_boolean_factory
+		)
+from coincidence.utils import (
+		generate_falsy_values,
+		generate_truthy_values,
+		is_docker,
+		whitespace,
+		whitespace_perms_list,
+		with_fixed_datetime
+		)
+
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020-2021 Dominic Davis-Foster"
 __license__: str = "MIT License"
 __version__: str = "0.0.0"
 __email__: str = "dominic@davis-foster.co.uk"
+
+__all__ = ["pytest_report_header", "PEP_563"]
+
+
+def pytest_report_header(config, startdir):
+	"""
+	Prints the start time of the pytest session.
+	"""
+
+	return f"Test session started at {datetime.datetime.now():%H:%M:%S}"
+
+
+PEP_563: bool = (sys.version_info[:2] >= (3, 10))
+"""
+:py:obj:`True` if the current Python version implements :pep:`563` -- Postponed Evaluation of Annotations.
+"""
