@@ -1,0 +1,45 @@
+# Configuration for 'repo_helper' (https://github.com/domdfcoding/repo_helper)
+---
+modname: 'coincidence'
+copyright_years: '2020-2021'
+author: 'Dominic Davis-Foster'
+email: 'dominic@davis-foster.co.uk'
+username: 'domdfcoding'
+version: '0.0.0'
+license: 'MIT'
+short_desc: 'Helper functions for pytest.'
+
+conda_channels:
+ - conda-forge
+
+python_deploy_version: 3.6
+
+python_versions:
+ - 3.6
+ - 3.7
+ - 3.8
+ - 3.9
+ - 3.10-dev
+ - pypy3
+
+classifiers:
+ - 'Development Status :: 4 - Beta'
+ - 'Intended Audience :: Developers'
+ - 'Topic :: Software Development :: Libraries :: Python Modules'
+
+keywords:
+ - utilities
+ - pytest
+ - testing
+ - unittest
+ - regression
+
+sphinx_conf_epilogue:
+ - toctree_plus_types.add("fixture")
+
+intersphinx_mapping:
+ - "'pytest': ('https://docs.pytest.org/en/stable', None)"
+ - "'pytest-regressions': ('https://pytest-regressions.readthedocs.io/en/latest/', None)"
+
+extra_sphinx_extensions:
+ - sphinx_autofixture

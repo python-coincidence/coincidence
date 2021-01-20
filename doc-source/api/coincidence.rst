@@ -1,0 +1,5 @@
+============
+coincidence
+============
+
+.. automodule:: coincidence
