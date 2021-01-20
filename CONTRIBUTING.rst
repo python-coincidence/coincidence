@@ -4,8 +4,7 @@ Contributing
 
 .. This file based on https://github.com/PyGithub/PyGithub/blob/master/CONTRIBUTING.md
 
-``coincidence`` uses `tox <https://tox.readthedocs.io>`_ to automate testing and packaging,
-and `pre-commit <https://pre-commit.com>`_ to maintain code quality.
+``coincidence`` uses `tox <https://tox.readthedocs.io>`_ to automate testing and packaging, and `pre-commit <https://pre-commit.com>`_ to maintain code quality.
 
 Install ``pre-commit`` with ``pip`` and install the git hook:
 
@@ -37,8 +36,7 @@ Or, to run the complete autoformatting suite:
 Automated tests
 -------------------
 
-Tests are run with ``tox`` and ``pytest``.
-To run tests for a specific Python version, such as Python 3.6:
+Tests are run with ``tox`` and ``pytest``. To run tests for a specific Python version, such as Python 3.6, run:
 
 .. code-block:: bash
 
