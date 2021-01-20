@@ -119,7 +119,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 					)
 
 		@classmethod
-		def now(cls, tz: Optional[datetime.timezone] = None):
+		def now(cls, tz: Optional[datetime.tzinfo] = None):
 			return datetime.datetime.fromtimestamp(fixed_datetime.timestamp())
 
 	D.__name__ = "date"
