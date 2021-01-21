@@ -40,7 +40,6 @@ import pytest
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from domdf_python_tools.typing import PathLike
-from pytest_regressions.data_regression import DataRegressionFixture
 from pytest_regressions.file_regression import FileRegressionFixture
 from typing_extensions import Protocol, runtime_checkable
 
@@ -51,6 +50,22 @@ __all__ = [
 		"AdvancedDataRegressionFixture",
 		"advanced_data_regression"
 		]
+
+try:
+	# 3rd party
+	from pytest_regressions.data_regression import DataRegressionFixture
+
+except ImportError as e:
+	if not str(e).endswith("'yaml'"):
+		raise
+
+	class DataRegressionFixture:  # type: ignore
+		"""
+		Placeholder ``DataRegressionFixture`` for when yaml can't be imported.
+		"""
+
+		def __init__(self, *args, **kwargs):
+			raise e
 
 
 def check_file_regression(
