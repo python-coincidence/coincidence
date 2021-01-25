@@ -1,0 +1,5 @@
+err:
+- 'Trailing whitespace bad        '
+out:
+- Hello World
+- "\t\tBoo!\t\t"

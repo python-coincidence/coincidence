@@ -37,6 +37,7 @@ from typing import Any, Counter, Dict, Mapping, Optional, Sequence, Union
 
 # 3rd party
 import pytest
+from _pytest.capture import CaptureResult  # nodep
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from domdf_python_tools.typing import PathLike
@@ -148,7 +149,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 
 	def check(
 			self,
-			data_dict: Union[Sequence, SupportsAsDict, Mapping, MappingProxyType],
+			data_dict: Union[Sequence, SupportsAsDict, Mapping, MappingProxyType, CaptureResult],
 			basename: Optional[str] = None,
 			fullpath: Optional[str] = None,
 			):
@@ -160,7 +161,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 		:param basename: The basename of the file to test/record.
 			If not given the name of the test is used.
 
-		:param fullpath: The aomplete path to use as a reference file.
+		:param fullpath: The complete path to use as a reference file.
 			This option will ignore ``datadir`` fixture when reading *expected* files,
 			but will still use it to write *obtained* files.
 			Useful if a reference file is located in the session data dir, for example.
@@ -172,6 +173,8 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 			data_dict = dict(data_dict)
 		elif isinstance(data_dict, SupportsAsDict):
 			data_dict = dict(data_dict._asdict())
+		elif isinstance(data_dict, CaptureResult):
+			data_dict = dict(out=data_dict.out.splitlines(), err=data_dict.err.splitlines())
 
 		super().check(data_dict, basename=basename, fullpath=fullpath)
 

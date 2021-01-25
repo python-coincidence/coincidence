@@ -1,4 +1,5 @@
 # stdlib
+import sys
 from collections import ChainMap, Counter, OrderedDict, defaultdict, namedtuple
 from types import MappingProxyType
 from typing import NamedTuple
@@ -41,6 +42,13 @@ def test_advanced_data_regression(advanced_data_regression, data):
 	print(type(data))
 	print(data)
 	advanced_data_regression.check(data)
+
+
+def test_advanced_data_regression_capsys(advanced_data_regression, capsys):
+	print("Hello World")
+	print("\t\tBoo!\t\t")
+	print("Trailing whitespace bad        ", file=sys.stderr)
+	advanced_data_regression.check(capsys.readouterr())
 
 
 def test_check_file_output(tmp_pathplus: PathPlus, file_regression: FileRegressionFixture):
