@@ -48,3 +48,5 @@ intersphinx_mapping:
 
 extra_sphinx_extensions:
  - sphinx_autofixture
+
+min_coverage: 95
