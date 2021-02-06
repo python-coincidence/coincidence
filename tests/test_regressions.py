@@ -83,7 +83,7 @@ def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressi
 
 
 def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRegressionFixture):
-	advanced_file_regression.check_bytes(b"Hello World")
+	advanced_file_regression.check_bytes(b"Hello World\n")
 
 
 def test_advanced_file_regression_output(
