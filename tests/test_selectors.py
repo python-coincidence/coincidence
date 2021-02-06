@@ -10,9 +10,11 @@ import pytest
 from coincidence.selectors import (
 		max_version,
 		min_version,
+		not_linux,
 		not_macos,
 		not_pypy,
 		not_windows,
+		only_linux,
 		only_macos,
 		only_pypy,
 		only_version,
@@ -79,4 +81,16 @@ def test_not_macos():
 @only_macos("Success")
 def test_only_macos():
 	if sys.platform != "darwin":
+		assert False  # noqa: PT015
+
+
+@not_linux("Success")
+def test_not_linux():
+	if sys.platform == "linux":
+		assert False  # noqa: PT015
+
+
+@only_linux("Success")
+def test_only_linux():
+	if sys.platform != "linux":
 		assert False  # noqa: PT015

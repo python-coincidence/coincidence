@@ -51,6 +51,8 @@ __all__ = [
 		"not_macos",
 		"only_macos",
 		"not_docker",
+		"not_linux",
+		"only_linux",
 		"only_docker",
 		"platform_boolean_factory",
 		]
@@ -181,6 +183,7 @@ skip a test {why} the current platform is {platform}.
 
 not_windows, only_windows = platform_boolean_factory(condition=sys.platform == "win32", platform="Windows")
 not_macos, only_macos = platform_boolean_factory(condition=sys.platform == "darwin", platform="macOS")
+not_linux, only_linux = platform_boolean_factory(condition=sys.platform == "linux", platform="Linux")
 
 not_docker, only_docker = platform_boolean_factory(condition=is_docker(), platform="Docker")
 not_docker.__doc__ = cast(str, not_docker.__doc__).replace("the current platform is", "running on")
