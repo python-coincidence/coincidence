@@ -32,8 +32,9 @@ Regression test helpers.
 
 # stdlib
 from collections import ChainMap, OrderedDict, defaultdict
+from functools import partial
 from types import MappingProxyType
-from typing import Any, Counter, Dict, Mapping, Optional, Sequence, Union
+from typing import Any, Callable, Counter, Dict, Mapping, Optional, Sequence, Union
 
 # 3rd party
 import pytest
@@ -41,6 +42,7 @@ from _pytest.capture import CaptureResult  # nodep
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from domdf_python_tools.typing import PathLike
+from pytest_regressions.common import check_text_files, perform_regression_check
 from pytest_regressions.file_regression import FileRegressionFixture
 from typing_extensions import Protocol, runtime_checkable
 
@@ -49,14 +51,16 @@ __all__ = [
 		"check_file_regression",
 		"SupportsAsDict",
 		"AdvancedDataRegressionFixture",
-		"advanced_data_regression"
+		"advanced_data_regression",
+		"AdvancedFileRegressionFixture",
+		"advanced_file_regression",
 		]
 
 try:
 	# 3rd party
 	from pytest_regressions.data_regression import DataRegressionFixture
 
-except ImportError as e:
+except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
 		raise
 
@@ -83,6 +87,8 @@ def check_file_regression(
 	:param extension: The extension of the reference file.
 	:param \*\*kwargs: Additional keyword arguments passed to
 		:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
+
+	.. seealso:: :meth:`.AdvancedFileRegression.check`
 	"""
 
 	__tracebackhide__ = True
@@ -103,7 +109,7 @@ def check_file_output(
 		**kwargs,
 		):
 	r"""
-	Check the content of the given file against the reference file.
+	Check the content of the given text file against the reference file.
 
 	:param filename:
 	:param file_regression: The file regression fixture for the test.
@@ -112,9 +118,9 @@ def check_file_output(
 	:param newline: Controls how universal newlines mode works. See :func:`open`.
 	:param \*\*kwargs: Additional keyword arguments passed to
 		:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
-	"""
 
-	__tracebackhide__ = True
+	.. seealso:: :meth:`.AdvancedFileRegression.check_file`
+	"""
 
 	filename = PathPlus(filename)
 
@@ -123,6 +129,8 @@ def check_file_output(
 
 	if extension == ".py":
 		extension = "._py_"
+
+	__tracebackhide__ = True
 
 	return check_file_regression(data, file_regression, extension, newline=newline, **kwargs)
 
@@ -176,13 +184,128 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 		elif isinstance(data_dict, CaptureResult):
 			data_dict = dict(out=data_dict.out.splitlines(), err=data_dict.err.splitlines())
 
+		__tracebackhide__ = True
+
 		super().check(data_dict, basename=basename, fullpath=fullpath)
 
 
 @pytest.fixture()
 def advanced_data_regression(datadir, original_datadir, request) -> AdvancedDataRegressionFixture:
 	"""
-	Pytest fixture for pertforming regression tests on lists, dictionaries and namedtuples.
+	Pytest fixture for performing regression tests on lists, dictionaries and namedtuples.
 	"""
 
 	return AdvancedDataRegressionFixture(datadir, original_datadir, request)
+
+
+class AdvancedFileRegressionFixture(FileRegressionFixture):
+	"""
+	Subclass of :class:`~pytest_regressions.file_regression.FileRegressionFixture`
+	with UTF-8 by default and some extra methods.
+
+	.. versionadded:: 0.2.0
+	"""  # noqa: D400
+
+	def check(  # type: ignore
+		self,
+		contents: Union[str, StringList],
+		encoding: Optional[str] = "UTF-8",
+		extension: str = ".txt",
+		newline: Optional[str] = None,
+		basename: Optional[str] = None,
+		fullpath: Optional[str] = None,
+		binary: bool = False,
+		obtained_filename: Optional[str] = None,
+		check_fn: Optional[Callable[[Any, Any], Any]] = None,
+		):
+		r"""
+		Checks the contents against a previously recorded version, or generates a new file.
+
+		:param contents:
+		:param extension: The extension of the reference file.
+		:param \*\*kwargs: Additional keyword arguments passed to
+			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
+
+		.. seealso:: :meth:`~.check_file_regression`
+		"""
+
+		__tracebackhide__ = True
+
+		if isinstance(contents, StringList):
+			contents = str(contents)
+		elif not isinstance(contents, str):
+			raise TypeError(f"Expected text contents but received type {type(contents).__name__}")
+
+		if check_fn is None:
+			check_fn = partial(check_text_files, encoding="UTF-8")
+
+		def dump_fn(filename):
+			PathPlus(filename, newline=newline).write_clean(contents)  # type: ignore
+
+		perform_regression_check(
+				datadir=self.datadir,
+				original_datadir=self.original_datadir,
+				request=self.request,
+				check_fn=check_fn,
+				dump_fn=dump_fn,
+				extension=extension,
+				basename=basename,
+				fullpath=fullpath,
+				force_regen=self.force_regen,
+				obtained_filename=obtained_filename,
+				)
+
+	def check_bytes(self, contents: bytes, **kwargs):
+		r"""
+		Checks the bytes contents against a previously recorded version, or generates a new file.
+
+		:param contents:
+		:param \*\*kwargs: Additional keyword arguments passed to
+			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
+		"""
+
+		__tracebackhide__ = True
+		super().check(contents, binary=True, **kwargs)
+
+	def check_file(
+			self,
+			filename: PathLike,
+			extension: Optional[str] = None,
+			newline: Optional[str] = '\n',
+			**kwargs,
+			):
+		r"""
+		Check the content of the given text file against the reference file.
+
+		:param filename:
+		:param extension: The extension of the reference file.
+			If :py:obj:`None` the extension is determined from ``filename``.
+		:param newline: Controls how universal newlines mode works. See :func:`open`.
+		:param \*\*kwargs: Additional keyword arguments passed to
+			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
+
+		.. seealso:: :meth:`~.check_file_output`
+		"""
+
+		filename = PathPlus(filename)
+
+		data = filename.read_text(encoding="UTF-8")
+		extension = extension or filename.suffix
+
+		if extension == ".py":
+			extension = "._py_"
+
+		__tracebackhide__ = True
+
+		return self.check(data, extension=extension, newline=newline, **kwargs)
+
+
+@pytest.fixture()
+def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:
+	"""
+	Pytest fixture for performing regression tests on strings, bytes and files.
+
+	.. versionadded:: 0.2.0
+	"""
+
+	return AdvancedFileRegressionFixture(datadir, original_datadir, request)

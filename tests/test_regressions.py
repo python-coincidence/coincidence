@@ -12,6 +12,7 @@ from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
 from coincidence import check_file_output, check_file_regression
+from coincidence.regressions import AdvancedFileRegressionFixture
 
 
 class Count(NamedTuple):
@@ -74,3 +75,25 @@ def test_check_file_regression(tmp_pathplus: PathPlus, file_regression: FileRegr
 	result.append("This is a test.")
 
 	check_file_regression(result, file_regression)
+
+
+@pytest.mark.parametrize("contents", ["Hello\nWorld", "Hello World", StringList(["Hello", "World"])])
+def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressionFixture, contents):
+	advanced_file_regression.check(contents)
+
+
+def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRegressionFixture):
+	advanced_file_regression.check_bytes(b"Hello World")
+
+
+def test_advanced_file_regression_output(
+		tmp_pathplus: PathPlus, advanced_file_regression: AdvancedFileRegressionFixture
+		):
+	with pytest.raises(FileNotFoundError, match="No such file or directory: '.*'"):
+		advanced_file_regression.check_file(tmp_pathplus / "file.txt")
+
+	(tmp_pathplus / "file.txt").write_text("Success!")
+	advanced_file_regression.check_file(tmp_pathplus / "file.txt")
+
+	(tmp_pathplus / "file.py").write_text("print('Success!')")
+	advanced_file_regression.check_file(tmp_pathplus / "file.py")
