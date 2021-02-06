@@ -11,7 +11,7 @@ from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
-from coincidence import check_file_output, check_file_regression
+from coincidence import check_file_output, check_file_regression, not_windows
 from coincidence.regressions import AdvancedFileRegressionFixture
 
 
@@ -82,6 +82,7 @@ def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressi
 	advanced_file_regression.check(contents)
 
 
+@not_windows
 def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check_bytes(b"Hello World\n")
 
