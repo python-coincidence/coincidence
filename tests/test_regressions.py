@@ -88,7 +88,8 @@ def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRe
 
 
 def test_advanced_file_regression_output(
-		tmp_pathplus: PathPlus, advanced_file_regression: AdvancedFileRegressionFixture
+		tmp_pathplus: PathPlus,
+		advanced_file_regression: AdvancedFileRegressionFixture,
 		):
 	with pytest.raises(FileNotFoundError, match="No such file or directory: '.*'"):
 		advanced_file_regression.check_file(tmp_pathplus / "file.txt")
