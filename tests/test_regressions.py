@@ -11,8 +11,8 @@ from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
-from coincidence import check_file_output, check_file_regression, not_windows
-from coincidence.regressions import AdvancedFileRegressionFixture
+from coincidence.selectors import not_windows
+from coincidence.regressions import AdvancedFileRegressionFixture, check_file_output, check_file_regression
 
 
 class Count(NamedTuple):
@@ -82,7 +82,7 @@ def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressi
 	advanced_file_regression.check(contents)
 
 
-@not_windows
+@not_windows()
 def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check_bytes(b"Hello World\n")
 
