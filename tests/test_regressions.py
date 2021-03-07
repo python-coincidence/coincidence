@@ -6,6 +6,7 @@ from typing import NamedTuple
 
 # 3rd party
 import pytest
+from domdf_python_tools.compat import PYPY37
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
@@ -52,8 +53,16 @@ def test_advanced_data_regression_capsys(advanced_data_regression, capsys):
 	advanced_data_regression.check(capsys.readouterr())
 
 
+
+if PYPY37:
+	no_such_file_pattern = r"No such file or directory: .*PathPlus\('.*'\)"
+else:
+	no_such_file_pattern = "No such file or directory: '.*'"
+
+
 def test_check_file_output(tmp_pathplus: PathPlus, file_regression: FileRegressionFixture):
-	with pytest.raises(FileNotFoundError, match="No such file or directory: '.*'"):
+
+	with pytest.raises(FileNotFoundError, match=no_such_file_pattern):
 		check_file_output(tmp_pathplus / "file.txt", file_regression)
 
 	(tmp_pathplus / "file.txt").write_text("Success!")
@@ -64,7 +73,7 @@ def test_check_file_output(tmp_pathplus: PathPlus, file_regression: FileRegressi
 
 
 def test_check_file_regression(tmp_pathplus: PathPlus, file_regression: FileRegressionFixture):
-	with pytest.raises(FileNotFoundError, match="No such file or directory: '.*'"):
+	with pytest.raises(FileNotFoundError, match=no_such_file_pattern):
 		check_file_output(tmp_pathplus / "file.txt", file_regression)
 
 	check_file_regression("Success!\n\nThis is a test.", file_regression)
@@ -91,7 +100,7 @@ def test_advanced_file_regression_output(
 		tmp_pathplus: PathPlus,
 		advanced_file_regression: AdvancedFileRegressionFixture,
 		):
-	with pytest.raises(FileNotFoundError, match="No such file or directory: '.*'"):
+	with pytest.raises(FileNotFoundError, match=no_such_file_pattern):
 		advanced_file_regression.check_file(tmp_pathplus / "file.txt")
 
 	(tmp_pathplus / "file.txt").write_text("Success!")
