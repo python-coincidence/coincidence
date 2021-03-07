@@ -31,10 +31,10 @@ Regression test helpers.
 #
 
 # stdlib
-from collections import ChainMap, OrderedDict, defaultdict
+from collections import ChainMap, Counter, OrderedDict, defaultdict
 from functools import partial
 from types import MappingProxyType
-from typing import Any, Callable, Counter, Dict, Mapping, Optional, Sequence, Union
+from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Union
 
 # 3rd party
 import pytest

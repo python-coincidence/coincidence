@@ -53,7 +53,6 @@ def test_advanced_data_regression_capsys(advanced_data_regression, capsys):
 	advanced_data_regression.check(capsys.readouterr())
 
 
-
 if PYPY37:
 	no_such_file_pattern = r"No such file or directory: .*PathPlus\('.*'\)"
 else:
