@@ -2,7 +2,7 @@
 import sys
 from collections import ChainMap, Counter, OrderedDict, defaultdict, namedtuple
 from types import MappingProxyType
-from typing import NamedTuple
+from typing import Dict, Mapping, NamedTuple
 
 # 3rd party
 import pytest
@@ -25,10 +25,36 @@ class Count(NamedTuple):
 Count2 = namedtuple("Count2", "a, b, c")
 
 
+class DictSubclass(dict):
+	pass
+
+
+class TypingDictSubclass(Dict):
+	pass
+
+
+class CustomMapping(Mapping):
+
+	def __init__(self, *args, **kwargs):
+		self._dict = dict(*args, **kwargs)
+
+	def __getitem__(self, item):
+		return self._dict[item]
+
+	def __iter__(self):
+		yield from self._dict
+
+	def __len__(self):
+		return len(self._dict)
+
+
 @pytest.mark.parametrize(
 		"data",
 		[
 				pytest.param({'a': 1, 'b': 2, 'c': 3}, id="dict"),
+				pytest.param(DictSubclass(a=1, b=2, c=3), id="DictSubclass"),
+				pytest.param(TypingDictSubclass(a=1, b=2, c=3), id="TypingDictSubclass"),
+				pytest.param(CustomMapping(a=1, b=2, c=3), id="CustomMapping"),
 				pytest.param(OrderedDict(a=1, b=2, c=3), id="OrderedDict"),
 				pytest.param(Counter(a=1, b=2, c=3), id="Counter"),
 				pytest.param(defaultdict(int, a=1, b=2, c=3), id="defaultdict"),
@@ -88,6 +114,14 @@ def test_check_file_regression(tmp_pathplus: PathPlus, file_regression: FileRegr
 @pytest.mark.parametrize("contents", ["Hello\nWorld", "Hello World", StringList(["Hello", "World"])])
 def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressionFixture, contents):
 	advanced_file_regression.check(contents)
+
+
+@pytest.mark.parametrize("contents", [b"hello world", ("hello world", ), [
+		"hello world",
+		], 12345])
+def test_advanced_file_regression_bad_type(advanced_file_regression: AdvancedFileRegressionFixture, contents):
+	with pytest.raises(TypeError, match="Expected text contents but received type '.*'"):
+		advanced_file_regression.check(contents)
 
 
 @not_windows()

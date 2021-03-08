@@ -150,10 +150,18 @@ class SupportsAsDict(Protocol):
 
 class AdvancedDataRegressionFixture(DataRegressionFixture):
 	"""
-	Subclass of :class:`~pytest_regressions.data_regression.DataRegressionFixture`
-	with support for :class:`collections.OrderedDict`, :class:`collections.Counter`,
-	and :func:`collections.NamedTuple`.
-	"""  # noqa: D400
+	Subclass of :class:`~pytest_regressions.data_regression.DataRegressionFixture` with support for additional types.
+
+	The following types and their subclasses are supported:
+
+	* :class:`collections.abc.Mapping`, :class:`typing.Mapping` (including :class:`dict` and :class:`typing.Dict`)
+	* :class:`collections.abc.Sequence`, :class:`typing.Sequence` (including :class:`list`, :class:`typing.Tuple` etc.)
+	* :class:`collections.OrderedDict`, :class:`typing.OrderedDict`
+	* :class:`collections.Counter`, :class:`typing.Counter`
+	* :class:`types.MappingProxyType` (cannot be subclassed)
+	* :class:`_pytest.capture.CaptureResult` (the type of :meth:`capsys.readouterr() <pytest.CaptureFixture.readouterr>`)
+	* Any type which implements the :protocol:`SupportsAsDict` protocol (including :class:`collections.namedtuple` and :class:`typing.NamedTuple`)
+	"""
 
 	def check(
 			self,
@@ -177,7 +185,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 		.. note::  ``basename`` and ``fullpath`` are exclusive.
 		"""
 
-		if isinstance(data_dict, (OrderedDict, Counter, defaultdict, MappingProxyType, ChainMap)):
+		if isinstance(data_dict, (Mapping, OrderedDict, Counter, defaultdict, MappingProxyType, ChainMap)):
 			data_dict = dict(data_dict)
 		elif isinstance(data_dict, SupportsAsDict):
 			data_dict = dict(data_dict._asdict())
@@ -234,7 +242,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		if isinstance(contents, StringList):
 			contents = str(contents)
 		elif not isinstance(contents, str):
-			raise TypeError(f"Expected text contents but received type {type(contents).__name__}")
+			raise TypeError(f"Expected text contents but received type {type(contents).__name__!r}")
 
 		if check_fn is None:
 			check_fn = partial(check_text_files, encoding="UTF-8")

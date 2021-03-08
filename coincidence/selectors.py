@@ -82,7 +82,7 @@ def min_version(
 
 	version_ = _make_version(version)
 
-	if reason is None:
+	if reason is None:  # pragma: no cover
 		reason = f"Requires Python {version_} or greater."
 
 	return pytest.mark.skipif(condition=sys.version_info[:3] < version_, reason=reason)
@@ -103,7 +103,7 @@ def max_version(
 
 	version_ = _make_version(version)
 
-	if reason is None:
+	if reason is None:  # pragma: no cover
 		reason = f"Not needed after Python {version_}."
 
 	return pytest.mark.skipif(condition=sys.version_info[:3] > version_, reason=reason)
@@ -124,7 +124,7 @@ def only_version(
 
 	version_ = _make_version(version)
 
-	if reason is None:
+	if reason is None:  # pragma: no cover
 		reason = f"Not needed on Python {version_}."
 
 	return pytest.mark.skipif(condition=sys.version_info[:2] != version_[:2], reason=reason)
@@ -183,7 +183,12 @@ skip a test {why} the current platform is {platform}.
 
 not_windows, only_windows = platform_boolean_factory(condition=sys.platform == "win32", platform="Windows")
 not_macos, only_macos = platform_boolean_factory(condition=sys.platform == "darwin", platform="macOS")
-not_linux, only_linux = platform_boolean_factory(condition=sys.platform == "linux", platform="Linux")
+
+not_linux, only_linux = platform_boolean_factory(
+		condition=sys.platform == "linux",
+		platform="Linux",
+		versionadded="0.2.0"
+		)
 
 not_docker, only_docker = platform_boolean_factory(condition=is_docker(), platform="Docker")
 not_docker.__doc__ = cast(str, not_docker.__doc__).replace("the current platform is", "running on")
