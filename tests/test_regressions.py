@@ -11,8 +11,8 @@ from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
-from coincidence.selectors import not_windows
 from coincidence.regressions import AdvancedFileRegressionFixture, check_file_output, check_file_regression
+from coincidence.selectors import not_windows
 
 
 class Count(NamedTuple):
