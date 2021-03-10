@@ -53,9 +53,9 @@ intersphinx_mapping:
 extra_sphinx_extensions:
  - sphinx_autofixture
 
-entry_points:
- pytest11:
-  - "coincidence = coincidence"
+#entry_points:
+# pytest11:
+#  - "coincidence = coincidence"
 
 tox_unmanaged:
  - testenv
