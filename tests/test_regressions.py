@@ -124,7 +124,7 @@ def test_advanced_file_regression_bad_type(advanced_file_regression: AdvancedFil
 		advanced_file_regression.check(contents)
 
 
-@not_windows()
+@not_windows("It's Windows")
 def test_advanced_file_regression_bytes(advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check_bytes(b"Hello World\n")
 

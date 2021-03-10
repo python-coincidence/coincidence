@@ -263,7 +263,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 				obtained_filename=obtained_filename,
 				)
 
-	def check_bytes(self, contents: bytes, **kwargs):
+	def check_bytes(self, contents: bytes, **kwargs):  # pragma: no cover (Windows)
 		r"""
 		Checks the bytes contents against a previously recorded version, or generates a new file.
 
