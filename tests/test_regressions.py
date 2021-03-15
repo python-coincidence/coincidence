@@ -2,7 +2,7 @@
 import sys
 from collections import ChainMap, Counter, OrderedDict, defaultdict, namedtuple
 from types import MappingProxyType
-from typing import Dict, Mapping, NamedTuple
+from typing import Dict, Mapping, NamedTuple, Sequence
 
 # 3rd party
 import pytest
@@ -48,6 +48,21 @@ class CustomMapping(Mapping):
 		return len(self._dict)
 
 
+class CustomSequence(Sequence):
+
+	def __init__(self, *args, **kwargs):
+		self._elements = tuple(*args, **kwargs)
+
+	def __getitem__(self, item):
+		return self._elements[item]
+
+	def __iter__(self):
+		yield from self._elements
+
+	def __len__(self):
+		return len(self._elements)
+
+
 @pytest.mark.parametrize(
 		"data",
 		[
@@ -55,6 +70,7 @@ class CustomMapping(Mapping):
 				pytest.param(DictSubclass(a=1, b=2, c=3), id="DictSubclass"),
 				pytest.param(TypingDictSubclass(a=1, b=2, c=3), id="TypingDictSubclass"),
 				pytest.param(CustomMapping(a=1, b=2, c=3), id="CustomMapping"),
+				pytest.param(CustomSequence([1, 2, 3]), id="CustomSequence"),
 				pytest.param(OrderedDict(a=1, b=2, c=3), id="OrderedDict"),
 				pytest.param(Counter(a=1, b=2, c=3), id="Counter"),
 				pytest.param(defaultdict(int, a=1, b=2, c=3), id="defaultdict"),
@@ -64,6 +80,16 @@ class CustomMapping(Mapping):
 				pytest.param(('a', 1, 'b', 2, 'c', 3), id="tuple"),
 				pytest.param(MappingProxyType({'a': 1, 'b': 2, 'c': 3}), id="MappingProxyType"),
 				pytest.param(ChainMap({'a': 1}, {'b': 2}, {'c': 3}), id="ChainMap"),
+				pytest.param(
+						OrderedDict({'a': MappingProxyType({'a': 1})}), id="Nested_OrderedDict_MappingProxyType"
+						),
+				pytest.param(
+						OrderedDict({'a': CustomSequence([1, 2, 3])}), id="Nested_OrderedDict_CustomSequence"
+						),
+				pytest.param(
+						CustomSequence([MappingProxyType({'a': 1})]), id="Nested_CustomSequence_MappingProxyType"
+						),
+				pytest.param(CustomMapping({'a': Count(a=1, b=2, c=3)}), id="Nested_CustomMapping_NamedTuple"),
 				]
 		)
 def test_advanced_data_regression(advanced_data_regression, data):
@@ -77,6 +103,13 @@ def test_advanced_data_regression_capsys(advanced_data_regression, capsys):
 	print("\t\tBoo!\t\t")
 	print("Trailing whitespace bad        ", file=sys.stderr)
 	advanced_data_regression.check(capsys.readouterr())
+
+
+def test_advanced_data_regression_capsys_nested(advanced_data_regression, capsys):
+	print("Hello World")
+	print("\t\tBoo!\t\t")
+	print("Trailing whitespace bad        ", file=sys.stderr)
+	advanced_data_regression.check(OrderedDict({'a': capsys.readouterr()}))
 
 
 if PYPY37:

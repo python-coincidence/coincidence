@@ -31,10 +31,11 @@ Regression test helpers.
 #
 
 # stdlib
+import collections
 from collections import ChainMap, Counter, OrderedDict, defaultdict
 from functools import partial
 from types import MappingProxyType
-from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Union
+from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union
 
 # 3rd party
 import pytest
@@ -56,9 +57,11 @@ __all__ = [
 		"advanced_file_regression",
 		]
 
+_C = TypeVar("_C", bound=Callable)
+
 try:
 	# 3rd party
-	from pytest_regressions.data_regression import DataRegressionFixture
+	from pytest_regressions.data_regression import DataRegressionFixture, RegressionYamlDumper
 
 except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
@@ -191,10 +194,50 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 			data_dict = dict(data_dict._asdict())
 		elif isinstance(data_dict, CaptureResult):
 			data_dict = dict(out=data_dict.out.splitlines(), err=data_dict.err.splitlines())
+		elif isinstance(data_dict, Sequence):
+			data_dict = list(data_dict)
 
 		__tracebackhide__ = True
 
 		super().check(data_dict, basename=basename, fullpath=fullpath)
+
+
+def _representer_for(*data_type: Type):
+
+	def deco(representer_fn: _C) -> _C:
+		for dtype in data_type:
+			RegressionYamlDumper.add_custom_yaml_representer(dtype, representer_fn)
+
+		return representer_fn
+
+	return deco
+
+
+@_representer_for(
+		collections.abc.Mapping,
+		collections.OrderedDict,
+		collections.Counter,
+		collections.defaultdict,
+		MappingProxyType,
+		)
+def _represent_mappings(dumper: RegressionYamlDumper, data):
+	data = dict(data)
+	return dumper.represent_data(data)
+
+
+@_representer_for(collections.abc.Sequence, tuple)
+def _represent_sequences(dumper: RegressionYamlDumper, data):
+	if isinstance(data, SupportsAsDict):
+		data = dict(data._asdict())
+	else:
+		data = list(data)
+	return dumper.represent_data(data)
+
+
+@_representer_for(CaptureResult)
+def _represent_captureresult(dumper: RegressionYamlDumper, data):
+	data = dict(out=data.out.splitlines(), err=data.err.splitlines())
+	return dumper.represent_data(data)
 
 
 @pytest.fixture()
