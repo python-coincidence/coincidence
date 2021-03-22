@@ -36,7 +36,7 @@ from collections import ChainMap, Counter, OrderedDict, defaultdict
 from contextlib import suppress
 from functools import partial
 from types import MappingProxyType
-from typing import Any, Callable, cast, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union
+from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union, cast
 
 # 3rd party
 import pytest
