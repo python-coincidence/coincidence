@@ -42,6 +42,7 @@ known_third_party = [
     "pytest_regressions",
     "pytest_timeout",
     "requests",
+    "toml",
     "typing_extensions",
 ]
 known_first_party = "coincidence"
