@@ -4,7 +4,7 @@ coincidence
 
 .. start short_desc
 
-**Helper functions for pytest.**
+.. documentation-summary::
 
 .. end short_desc
 
