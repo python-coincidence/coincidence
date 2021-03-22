@@ -6,6 +6,7 @@ from typing import Dict, Mapping, NamedTuple, Sequence
 
 # 3rd party
 import pytest
+import toml
 from domdf_python_tools.compat import PYPY37
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
@@ -63,6 +64,9 @@ class CustomSequence(Sequence):
 		return len(self._elements)
 
 
+some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
+
+
 @pytest.mark.parametrize(
 		"data",
 		[
@@ -90,6 +94,7 @@ class CustomSequence(Sequence):
 						CustomSequence([MappingProxyType({'a': 1})]), id="Nested_CustomSequence_MappingProxyType"
 						),
 				pytest.param(CustomMapping({'a': Count(a=1, b=2, c=3)}), id="Nested_CustomMapping_NamedTuple"),
+				pytest.param(toml.loads(some_toml)["section"]["table"], id="Toml_InlineTableDict"),
 				]
 		)
 def test_advanced_data_regression(advanced_data_regression, data):

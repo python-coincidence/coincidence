@@ -33,9 +33,10 @@ Regression test helpers.
 # stdlib
 import collections
 from collections import ChainMap, Counter, OrderedDict, defaultdict
+from contextlib import suppress
 from functools import partial
 from types import MappingProxyType
-from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union
+from typing import Any, Callable, cast, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union
 
 # 3rd party
 import pytest
@@ -231,6 +232,7 @@ def _represent_sequences(dumper: RegressionYamlDumper, data):
 		data = dict(data._asdict())
 	else:
 		data = list(data)
+
 	return dumper.represent_data(data)
 
 
@@ -238,6 +240,12 @@ def _represent_sequences(dumper: RegressionYamlDumper, data):
 def _represent_captureresult(dumper: RegressionYamlDumper, data):
 	data = dict(out=data.out.splitlines(), err=data.err.splitlines())
 	return dumper.represent_data(data)
+
+
+with suppress(TypeError):
+	# 3rd party
+	import toml
+	_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
 
 
 @pytest.fixture()
