@@ -13,9 +13,9 @@
    version="1.1"
    id="svg4077"
    sodipodi:docname="coincidence.svg"
-   inkscape:export-filename="/home/domdf/Python/01 GitHub Repos/03 Libraries/coincidence/coincidence.png"
-   inkscape:export-xdpi="38.099998"
-   inkscape:export-ydpi="38.099998"
+   inkscape:export-filename="/home/domdf/Python/01 GitHub Repos/03 Libraries/coincidence/coincidence-512.png"
+   inkscape:export-xdpi="130.048"
+   inkscape:export-ydpi="130.048"
    inkscape:version="1.0.1 (0767f8302a, 2020-10-17)">
   <defs
      id="defs4071" />
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
