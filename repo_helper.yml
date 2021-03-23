@@ -4,10 +4,12 @@ modname: 'coincidence'
 copyright_years: '2020-2021'
 author: 'Dominic Davis-Foster'
 email: 'dominic@davis-foster.co.uk'
-username: 'domdfcoding'
+username: 'python-coincidence'
+assignee: 'domdfcoding'
 version: '0.2.3'
 license: 'MIT'
 short_desc: 'Helper functions for pytest.'
+primary_conda_channel: domdfcoding
 
 conda_channels:
  - conda-forge

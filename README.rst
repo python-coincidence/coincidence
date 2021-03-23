@@ -34,40 +34,40 @@ coincidence
 	:target: https://coincidence.readthedocs.io/en/latest
 	:alt: Documentation Build Status
 
-.. |docs_check| image:: https://github.com/domdfcoding/coincidence/workflows/Docs%20Check/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22Docs+Check%22
+.. |docs_check| image:: https://github.com/python-coincidence/coincidence/workflows/Docs%20Check/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22Docs+Check%22
 	:alt: Docs Check Status
 
-.. |actions_linux| image:: https://github.com/domdfcoding/coincidence/workflows/Linux/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22Linux%22
+.. |actions_linux| image:: https://github.com/python-coincidence/coincidence/workflows/Linux/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22Linux%22
 	:alt: Linux Test Status
 
-.. |actions_windows| image:: https://github.com/domdfcoding/coincidence/workflows/Windows/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22Windows%22
+.. |actions_windows| image:: https://github.com/python-coincidence/coincidence/workflows/Windows/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22Windows%22
 	:alt: Windows Test Status
 
-.. |actions_macos| image:: https://github.com/domdfcoding/coincidence/workflows/macOS/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22macOS%22
+.. |actions_macos| image:: https://github.com/python-coincidence/coincidence/workflows/macOS/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22macOS%22
 	:alt: macOS Test Status
 
-.. |actions_flake8| image:: https://github.com/domdfcoding/coincidence/workflows/Flake8/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22Flake8%22
+.. |actions_flake8| image:: https://github.com/python-coincidence/coincidence/workflows/Flake8/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22Flake8%22
 	:alt: Flake8 Status
 
-.. |actions_mypy| image:: https://github.com/domdfcoding/coincidence/workflows/mypy/badge.svg
-	:target: https://github.com/domdfcoding/coincidence/actions?query=workflow%3A%22mypy%22
+.. |actions_mypy| image:: https://github.com/python-coincidence/coincidence/workflows/mypy/badge.svg
+	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://requires.io/github/domdfcoding/coincidence/requirements.svg?branch=master
-	:target: https://requires.io/github/domdfcoding/coincidence/requirements/?branch=master
+.. |requires| image:: https://requires.io/github/python-coincidence/coincidence/requirements.svg?branch=master
+	:target: https://requires.io/github/python-coincidence/coincidence/requirements/?branch=master
 	:alt: Requirements Status
 
-.. |coveralls| image:: https://img.shields.io/coveralls/github/domdfcoding/coincidence/master?logo=coveralls
-	:target: https://coveralls.io/github/domdfcoding/coincidence?branch=master
+.. |coveralls| image:: https://img.shields.io/coveralls/github/python-coincidence/coincidence/master?logo=coveralls
+	:target: https://coveralls.io/github/python-coincidence/coincidence?branch=master
 	:alt: Coverage
 
-.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/coincidence?logo=codefactor
-	:target: https://www.codefactor.io/repository/github/domdfcoding/coincidence
+.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/python-coincidence/coincidence?logo=codefactor
+	:target: https://www.codefactor.io/repository/github/python-coincidence/coincidence
 	:alt: CodeFactor Grade
 
 .. |pypi-version| image:: https://img.shields.io/pypi/v/coincidence
@@ -94,19 +94,19 @@ coincidence
 	:target: https://anaconda.org/domdfcoding/coincidence
 	:alt: Conda - Platform
 
-.. |license| image:: https://img.shields.io/github/license/domdfcoding/coincidence
-	:target: https://github.com/domdfcoding/coincidence/blob/master/LICENSE
+.. |license| image:: https://img.shields.io/github/license/python-coincidence/coincidence
+	:target: https://github.com/python-coincidence/coincidence/blob/master/LICENSE
 	:alt: License
 
-.. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/coincidence
+.. |language| image:: https://img.shields.io/github/languages/top/python-coincidence/coincidence
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/coincidence/v0.2.3
-	:target: https://github.com/domdfcoding/coincidence/pulse
+.. |commits-since| image:: https://img.shields.io/github/commits-since/python-coincidence/coincidence/v0.2.3
+	:target: https://github.com/python-coincidence/coincidence/pulse
 	:alt: GitHub commits since tagged version
 
-.. |commits-latest| image:: https://img.shields.io/github/last-commit/domdfcoding/coincidence
-	:target: https://github.com/domdfcoding/coincidence/commit/master
+.. |commits-latest| image:: https://img.shields.io/github/last-commit/python-coincidence/coincidence
+	:target: https://github.com/python-coincidence/coincidence/commit/master
 	:alt: GitHub last commit
 
 .. |maintained| image:: https://img.shields.io/maintenance/yes/2021
@@ -116,8 +116,8 @@ coincidence
 	:target: https://pypi.org/project/coincidence/
 	:alt: PyPI - Downloads
 
-.. |pre_commit_ci| image:: https://results.pre-commit.ci/badge/github/domdfcoding/coincidence/master.svg
-	:target: https://results.pre-commit.ci/latest/github/domdfcoding/coincidence/master
+.. |pre_commit_ci| image:: https://results.pre-commit.ci/badge/github/python-coincidence/coincidence/master.svg
+	:target: https://results.pre-commit.ci/latest/github/python-coincidence/coincidence/master
 	:alt: pre-commit.ci status
 
 .. end shields
