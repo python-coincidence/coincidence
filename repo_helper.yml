@@ -56,6 +56,3 @@ extra_sphinx_extensions:
 #entry_points:
 # pytest11:
 #  - "coincidence = coincidence"
-
-tox_unmanaged:
- - testenv
