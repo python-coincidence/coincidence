@@ -242,9 +242,10 @@ def _represent_captureresult(dumper: RegressionYamlDumper, data):
 	return dumper.represent_data(data)
 
 
-with suppress(TypeError):
+with suppress(ImportError):
 	# 3rd party
 	import toml
+
 	_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
 
 
@@ -292,14 +293,15 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 
 		if isinstance(contents, StringList):
 			contents = str(contents)
-		elif not isinstance(contents, str):
+
+		if not isinstance(contents, str):
 			raise TypeError(f"Expected text contents but received type {type(contents).__name__!r}")
 
 		if check_fn is None:
 			check_fn = partial(check_text_files, encoding="UTF-8")
 
 		def dump_fn(filename):
-			PathPlus(filename, newline=newline).write_clean(contents)  # type: ignore
+			PathPlus(filename, newline=newline).write_clean(cast(str, contents))
 
 		perform_regression_check(
 				datadir=self.datadir,
