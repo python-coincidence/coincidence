@@ -64,6 +64,47 @@ try:
 	# 3rd party
 	from pytest_regressions.data_regression import DataRegressionFixture, RegressionYamlDumper
 
+	def _representer_for(*data_type: Type):
+
+		def deco(representer_fn: _C) -> _C:
+			for dtype in data_type:
+				RegressionYamlDumper.add_custom_yaml_representer(dtype, representer_fn)
+
+			return representer_fn
+
+		return deco
+
+	@_representer_for(
+			collections.abc.Mapping,
+			collections.OrderedDict,
+			collections.Counter,
+			collections.defaultdict,
+			MappingProxyType,
+			)
+	def _represent_mappings(dumper: RegressionYamlDumper, data):
+		data = dict(data)
+		return dumper.represent_data(data)
+
+	@_representer_for(collections.abc.Sequence, tuple)
+	def _represent_sequences(dumper: RegressionYamlDumper, data):
+		if isinstance(data, SupportsAsDict):
+			data = dict(data._asdict())
+		else:
+			data = list(data)
+
+		return dumper.represent_data(data)
+
+	@_representer_for(CaptureResult)
+	def _represent_captureresult(dumper: RegressionYamlDumper, data):
+		data = dict(out=data.out.splitlines(), err=data.err.splitlines())
+		return dumper.represent_data(data)
+
+	with suppress(ImportError):
+		# 3rd party
+		import toml
+
+		_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
+
 except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
 		raise
@@ -201,52 +242,6 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 		__tracebackhide__ = True
 
 		super().check(data_dict, basename=basename, fullpath=fullpath)
-
-
-def _representer_for(*data_type: Type):
-
-	def deco(representer_fn: _C) -> _C:
-		for dtype in data_type:
-			RegressionYamlDumper.add_custom_yaml_representer(dtype, representer_fn)
-
-		return representer_fn
-
-	return deco
-
-
-@_representer_for(
-		collections.abc.Mapping,
-		collections.OrderedDict,
-		collections.Counter,
-		collections.defaultdict,
-		MappingProxyType,
-		)
-def _represent_mappings(dumper: RegressionYamlDumper, data):
-	data = dict(data)
-	return dumper.represent_data(data)
-
-
-@_representer_for(collections.abc.Sequence, tuple)
-def _represent_sequences(dumper: RegressionYamlDumper, data):
-	if isinstance(data, SupportsAsDict):
-		data = dict(data._asdict())
-	else:
-		data = list(data)
-
-	return dumper.represent_data(data)
-
-
-@_representer_for(CaptureResult)
-def _represent_captureresult(dumper: RegressionYamlDumper, data):
-	data = dict(out=data.out.splitlines(), err=data.err.splitlines())
-	return dumper.represent_data(data)
-
-
-with suppress(ImportError):
-	# 3rd party
-	import toml
-
-	_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
 
 
 @pytest.fixture()
