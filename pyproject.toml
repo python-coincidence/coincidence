@@ -9,9 +9,11 @@ description = "Helper functions for pytest."
 readme = "README.rst"
 keywords = [ "utilities", "pytest", "testing", "unittest", "regression",]
 dynamic = [ "requires-python", "classifiers", "dependencies",]
+
 [[project.authors]]
 email = "dominic@davis-foster.co.uk"
 name = "Dominic Davis-Foster"
+
 
 [project.license]
 file = "LICENSE"
