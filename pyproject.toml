@@ -4,7 +4,7 @@ build-backend = "whey"
 
 [project]
 name = "coincidence"
-version = "0.3.0"
+version = "0.3.1"
 description = "Helper functions for pytest."
 readme = "README.rst"
 keywords = [ "utilities", "pytest", "testing", "unittest", "regression",]
