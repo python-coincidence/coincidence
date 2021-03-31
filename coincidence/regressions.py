@@ -111,7 +111,7 @@ except ImportError as e:  # pragma: no cover
 
 	class DataRegressionFixture:  # type: ignore
 		"""
-		Placeholder ``DataRegressionFixture`` for when yaml can't be imported.
+		Placeholder ``DataRegressionFixture`` for when PyYAML can't be imported.
 		"""
 
 		def __init__(self, *args, **kwargs):
