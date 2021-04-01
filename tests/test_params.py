@@ -1,13 +1,15 @@
 # stdlib
 import random
 import re
+from operator import itemgetter
 
 # 3rd party
+import pytest
 from _pytest.mark import Mark, MarkDecorator
 from domdf_python_tools.utils import strtobool
 
 # this package
-from coincidence.params import count, testing_boolean_values, whitespace_perms
+from coincidence.params import count, param, testing_boolean_values, whitespace_perms
 
 
 def test_testing_boolean_strings():
@@ -56,3 +58,22 @@ def test_whitespace_perms():
 
 	for string in whitespace_perms().mark.args[1]:
 		assert re.match(r"^\s*$", string)
+
+
+def test_param():
+	assert param("6*9", 42, marks=pytest.mark.xfail).id is None
+	assert param("2**2", 4, idx=0).id == "2**2"
+	assert param("3**2", 9, id="3^2").id == "3^2"
+	assert param("sqrt(9)", 3, key=itemgetter(0)).id == "sqrt(9)"
+
+	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
+		param("sqrt(9)", 3, id="√9", key=itemgetter(0))  # type: ignore
+
+	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
+		param("sqrt(9)", 3, id="√9", idx=0)  # type: ignore
+
+	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
+		param("sqrt(9)", 3, idx=0, key=itemgetter(0))  # type: ignore
+
+	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
+		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore

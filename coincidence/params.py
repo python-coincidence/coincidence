@@ -25,20 +25,24 @@
 #  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
+#  "param" based on pytest
+#  Copyright (c) 2004-2020 Holger Krekel and others
+#  MIT Licensed
+#
 
 # stdlib
 import itertools
 import random
-from typing import Sequence
+from typing import Callable, Collection, Optional, Sequence, Tuple, Union, cast, overload
 
 # 3rd party
 import pytest
-from _pytest.mark import MarkDecorator  # nodep
+from _pytest.mark import Mark, MarkDecorator, ParameterSet  # nodep
 
 # this package
 from coincidence.utils import generate_falsy_values, generate_truthy_values, whitespace_perms_list
 
-__all__ = ["count", "testing_boolean_values", "whitespace_perms"]
+__all__ = ["count", "testing_boolean_values", "whitespace_perms", "param"]
 
 MarkDecorator.__module__ = "_pytest.mark"
 
@@ -103,3 +107,71 @@ def count(stop: int, start: int = 0, step: int = 1) -> MarkDecorator:
 	"""  # noqa D400
 
 	return pytest.mark.parametrize("count", range(start, stop, step))
+
+
+@overload
+def param(
+		*values: object,
+		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
+		id: Optional[str] = ...,  # noqa: A002  # pylint: disable=redefined-builtin
+		) -> ParameterSet: ...
+
+
+@overload
+def param(
+		*values: object,
+		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
+		idx: Optional[int],  # noqa: A002  # pylint: disable=redefined-builtin
+		) -> ParameterSet: ...
+
+
+@overload
+def param(
+		*values: object,
+		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
+		key: Optional[Callable[[Tuple[object, ...]], str]],  # noqa: A002  # pylint: disable=redefined-builtin
+		) -> ParameterSet: ...
+
+
+def param(
+		*values: object,
+		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
+		id: Optional[str] = None,  # noqa: A002  # pylint: disable=redefined-builtin
+		idx: Optional[int] = None,
+		key: Optional[Callable[[Tuple[object, ...]], str]] = None,
+		) -> ParameterSet:
+	r"""
+	Specify a parameter in `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
+	calls or :ref:`parametrized fixtures <fixture-parametrize-marks>`.
+
+	.. code-block:: python
+
+		@pytest.mark.parametrize("test_input, expected", [
+			("3+5", 8),
+			param("6*9", 42, marks=pytest.mark.xfail),
+			param("2**2", 4, idx=0),
+			param("3**2", 9, id="3^2"),
+			param("sqrt(9)", 3, key=itemgetter(0)),
+		])
+		def test_eval(test_input, expected):
+			assert eval (test_input) == expected
+
+	.. versionadded:: 0.3.0
+
+	:param \*values: Variable args of the values of the parameter set, in order.
+	:param marks: A single mark or a list of marks to be applied to this parameter set.
+	:param id: The id to attribute to this parameter set.
+	:param idx: The index of the value in ``*values`` to use as the id.
+	:param key: A callable which is given ``values`` (as a :class:`tuple`) and returns the value to use as the id.
+	"""  # noqa: D400
+
+	if len([x for x in (id, idx, key) if x is not None]) > 1:
+		raise ValueError("'id', 'idx' and 'key' are mutually exclusive.")
+
+	if idx is not None:
+		# pytest will catch the type error later on
+		id = cast(str, values[idx])  # noqa: A001  # pylint: disable=redefined-builtin
+	elif key is not None:
+		id = key(values)  # noqa: A001  # pylint: disable=redefined-builtin
+
+	return ParameterSet.param(*values, marks=marks, id=id)
