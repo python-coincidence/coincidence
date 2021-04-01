@@ -5,11 +5,11 @@ from operator import itemgetter
 
 # 3rd party
 import pytest
-from _pytest.mark import Mark, MarkDecorator
+from _pytest.mark import Mark, MarkDecorator, ParameterSet
 from domdf_python_tools.utils import strtobool
 
 # this package
-from coincidence.params import count, param, testing_boolean_values, whitespace_perms
+from coincidence.params import count, param, parametrized_versions, testing_boolean_values, whitespace_perms
 
 
 def test_testing_boolean_strings():
@@ -77,3 +77,49 @@ def test_param():
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
 		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore
+
+
+def test_parametrized_versions():
+	versions = parametrized_versions(3.6, 3.7, 3.8, reasons="Output differs on each version.")
+	assert len(versions) == 3
+	assert all(isinstance(v, ParameterSet) for v in versions)
+
+	assert versions[0].values == ("3.6", )
+	assert versions[1].values == ("3.7", )
+	assert versions[2].values == ("3.8", )
+
+	assert versions[0].marks[0].mark.name == "skipif"
+	assert versions[1].marks[0].mark.name == "skipif"
+	assert versions[2].marks[0].mark.name == "skipif"
+
+	assert versions[0].marks[0].kwargs["reason"] == "Output differs on each version."
+	assert versions[1].marks[0].kwargs["reason"] == "Output differs on each version."
+	assert versions[2].marks[0].kwargs["reason"] == "Output differs on each version."
+
+	assert all(len(v.marks) == 1 for v in versions)
+
+
+def test_parametrized_versions_list():
+	versions = parametrized_versions(
+			"3.6",
+			(3, 7),
+			3.9,
+			reasons=["Output differs on each version.", "Output differs on Python 3.7."],
+			)
+
+	assert len(versions) == 3
+	assert all(isinstance(v, ParameterSet) for v in versions)
+
+	assert versions[0].values == ("3.6", )
+	assert versions[1].values == ("3.7", )
+	assert versions[2].values == ("3.9", )
+
+	assert versions[0].marks[0].mark.name == "skipif"
+	assert versions[1].marks[0].mark.name == "skipif"
+	assert versions[2].marks[0].mark.name == "skipif"
+
+	assert versions[0].marks[0].kwargs["reason"] == "Output differs on each version."
+	assert versions[1].marks[0].kwargs["reason"] == "Output differs on Python 3.7."
+	assert versions[2].marks[0].kwargs["reason"] == "Not needed on Python v3.9.0."
+
+	assert all(len(v.marks) == 1 for v in versions)

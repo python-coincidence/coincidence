@@ -33,16 +33,18 @@
 # stdlib
 import itertools
 import random
-from typing import Callable, Collection, Optional, Sequence, Tuple, Union, cast, overload
+from typing import Callable, Collection, Iterable, List, Optional, Sequence, Tuple, Union, cast, overload
 
 # 3rd party
 import pytest
 from _pytest.mark import Mark, MarkDecorator, ParameterSet  # nodep
+from domdf_python_tools.iterative import extend_with_none
 
 # this package
+from coincidence.selectors import _make_version, only_version
 from coincidence.utils import generate_falsy_values, generate_truthy_values, whitespace_perms_list
 
-__all__ = ["count", "testing_boolean_values", "whitespace_perms", "param"]
+__all__ = ["count", "testing_boolean_values", "whitespace_perms", "param", "parametrized_versions"]
 
 MarkDecorator.__module__ = "_pytest.mark"
 
@@ -156,7 +158,7 @@ def param(
 		def test_eval(test_input, expected):
 			assert eval (test_input) == expected
 
-	.. versionadded:: 0.3.0
+	.. versionadded:: 0.4.0
 
 	:param \*values: Variable args of the values of the parameter set, in order.
 	:param marks: A single mark or a list of marks to be applied to this parameter set.
@@ -175,3 +177,62 @@ def param(
 		id = key(values)  # noqa: A001  # pylint: disable=redefined-builtin
 
 	return ParameterSet.param(*values, marks=marks, id=id)
+
+
+def parametrized_versions(
+		*versions: Union[str, float, Tuple[int, ...]],
+		reasons: Union[str, Iterable[Optional[str]]] = (),
+		) -> List[ParameterSet]:
+	r"""
+	Return a list of parametrized version numbers.
+
+	**Examples:**
+
+	.. code-block:: python
+
+		@pytest.mark.parametrize(
+			"version",
+			parametrized_versions(3.6, 3.7, 3.8, reason="Output differs on each version."),
+			)
+		def test_something(version: str):
+			pass
+
+
+	.. code-block:: python
+
+		@pytest.fixture(
+			params=parametrized_versions(3.6, 3.7, 3.8, reason="Output differs on each version."),
+			)
+		def version(request):
+			return request.param
+
+		def test_something(version: str):
+			pass
+
+	.. versionadded:: 0.4.0
+
+	:param \*versions: The Python versions to parametrize.
+	:param reasons: The reasons to use when skipping versions.
+		Either a string value to use for all versions,
+		or a list of values which correspond to ``*versions``.
+	"""
+
+	versions = list(versions)
+	params = []
+
+	if isinstance(reasons, str):
+		reasons = [reasons] * len(versions)
+	else:
+		reasons = extend_with_none(reasons, len(versions))
+
+	for version, reason in zip(versions, reasons):
+		version_ = _make_version(version)
+
+		the_param = pytest.param(
+				f"{version_.major}.{version_.minor}",
+				marks=only_version(version_, reason=reason),
+				)
+
+		params.append(the_param)
+
+	return params
