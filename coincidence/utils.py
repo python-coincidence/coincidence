@@ -59,7 +59,7 @@ _cgroup = PathPlus("/proc/self/cgroup")
 _dockerenv = "/.dockerenv"
 
 
-def is_docker():
+def is_docker() -> bool:
 	"""
 	Is this current environment running in docker?
 

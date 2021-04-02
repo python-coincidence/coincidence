@@ -144,7 +144,7 @@ def platform_boolean_factory(
 	:param platform:
 	:param versionadded:
 	:param module: The module to set the function as belonging to in ``__module__``.
-		If :py:obj:`None` ``__module__`` is set to ``'coincidence'``.
+		If :py:obj:`None` ``__module__`` is set to ``'coincidence.selectors'``.
 
 	:return: 2-element tuple of ``not_function``, ``only_function``.
 	"""
