@@ -7,6 +7,7 @@ from typing import Tuple
 import pytest
 
 # this package
+from coincidence.params import parametrized_versions
 from coincidence.selectors import (
 		max_version,
 		min_version,
@@ -45,6 +46,15 @@ def test_max_version():
 		)
 def test_only_version(py_version: Tuple[int, int]):
 	if sys.version_info[:2] != py_version:
+		assert False  # noqa: PT015
+
+
+@pytest.mark.parametrize(
+		"py_version",
+		parametrized_versions((3, 4), (3, 5), (3, 6), (3, 8), (3, 9), (3, 10), reasons="Success")
+		)
+def test_parametrized_versions_mark(py_version):
+	if f"{sys.version_info.major}.{sys.version_info.minor}" != py_version:
 		assert False  # noqa: PT015
 
 
