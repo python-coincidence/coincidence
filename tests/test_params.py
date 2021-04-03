@@ -2,6 +2,7 @@
 import random
 import re
 from operator import itemgetter
+from typing import no_type_check
 
 # 3rd party
 import pytest
@@ -79,6 +80,7 @@ def test_param():
 		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore
 
 
+@no_type_check
 def test_parametrized_versions():
 	versions = parametrized_versions(3.6, 3.7, 3.8, reasons="Output differs on each version.")
 	assert len(versions) == 3
@@ -99,6 +101,7 @@ def test_parametrized_versions():
 	assert all(len(v.marks) == 1 for v in versions)
 
 
+@no_type_check
 def test_parametrized_versions_list():
 	versions = parametrized_versions(
 			"3.6",

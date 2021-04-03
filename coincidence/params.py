@@ -217,15 +217,15 @@ def parametrized_versions(
 		or a list of values which correspond to ``*versions``.
 	"""
 
-	versions = list(versions)
+	version_list = list(versions)
 	params = []
 
 	if isinstance(reasons, str):
-		reasons = [reasons] * len(versions)
+		reasons = [reasons] * len(version_list)
 	else:
-		reasons = extend_with_none(reasons, len(versions))
+		reasons = extend_with_none(reasons, len(version_list))
 
-	for version, reason in zip(versions, reasons):
+	for version, reason in zip(version_list, reasons):
 		version_ = _make_version(version)
 
 		the_param = pytest.param(
