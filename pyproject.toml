@@ -41,5 +41,5 @@ platforms = [ "Windows", "macOS", "Linux",]
 license-key = "MIT"
 
 [tool.mkrecipe]
-extras = [ "all",]
+extras = "all"
 conda-channels = [ "conda-forge", "domdfcoding",]
