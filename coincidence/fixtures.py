@@ -113,10 +113,10 @@ def fixed_datetime(monkeypatch):
 				]
 		)
 def path_separator(request) -> str:
-	"""
+	r"""
 	Parametrized pytest fixture which returns the current filesystem path separator and skips the test for the other.
 
-	This is useful when the test output differs on platforms with ``\\`` as the path separator, such as windows.
+	This is useful when the test output differs on platforms with ``\`` as the path separator, such as windows.
 
 	.. versionadded:: 0.4.0
 	"""
