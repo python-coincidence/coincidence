@@ -40,7 +40,7 @@ from coincidence.utils import with_fixed_datetime
 
 __import__("pytest_datadir")
 
-__all__ = ["fixed_datetime", "original_datadir", "tmp_pathplus"]
+__all__ = ["fixed_datetime", "original_datadir", "tmp_pathplus", "path_separator"]
 
 
 @pytest.fixture()
@@ -92,3 +92,33 @@ def fixed_datetime(monkeypatch):
 
 	with with_fixed_datetime(datetime.datetime(2020, 10, 13, 2, 20)):
 		yield
+
+
+@pytest.fixture(
+		params=[
+				pytest.param(
+						'/',
+						id="forward",
+						marks=pytest.mark.skipif(
+								os.sep == '\\', reason=r"Output differs on platforms where os.sep == '\\'"
+								)
+						),
+				pytest.param(
+						'\\',
+						id="backward",
+						marks=pytest.mark.skipif(
+								os.sep == '/', reason="Output differs on platforms where os.sep == '/'"
+								)
+						),
+				]
+		)
+def path_separator(request) -> str:
+	"""
+	Parametrized pytest fixture which returns the current filesystem path separator and skips the test for the other.
+
+	This is useful when the test output differs on platforms with ``\\`` as the path separator, such as windows.
+
+	.. versionadded:: 0.4.0
+	"""
+
+	return request.param

@@ -31,7 +31,7 @@ import datetime
 import sys
 
 # this package
-from coincidence.fixtures import fixed_datetime, original_datadir, tmp_pathplus
+from coincidence.fixtures import fixed_datetime, original_datadir, path_separator, tmp_pathplus
 from coincidence.params import count, testing_boolean_values, whitespace_perms
 from coincidence.regressions import (
 		AdvancedDataRegressionFixture,

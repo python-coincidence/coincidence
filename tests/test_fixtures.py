@@ -23,3 +23,7 @@ def test_fixed_datetime(fixed_datetime):
 	assert datetime.date.__name__ == "date"
 	assert datetime.date.__qualname__ == "date"
 	assert datetime.date.__module__ == "datetime"
+
+
+def test_path_separator(path_separator: str):
+	assert isinstance(path_separator, str)
