@@ -55,7 +55,7 @@ def testing_boolean_values(
 		ratio: float = 1,
 		) -> MarkDecorator:
 	"""
-	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
+	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
 	decorator that provides a list of strings, integers and booleans, and the boolean representations of them.
 
 	The parametrized arguments are ``boolean_string`` for the input value,
@@ -98,7 +98,7 @@ def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 
 def count(stop: int, start: int = 0, step: int = 1) -> MarkDecorator:
 	"""
-	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
+	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
 	decorator that provides a list of numbers between ``start`` and ``stop`` with an interval of ``step``.
 
 	The single parametrized argument is ``count``.
@@ -143,7 +143,7 @@ def param(
 		key: Optional[Callable[[Tuple[object, ...]], str]] = None,
 		) -> ParameterSet:
 	r"""
-	Specify a parameter in `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
+	Specify a parameter in `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
 	calls or :ref:`parametrized fixtures <fixture-parametrize-marks>`.
 
 	.. code-block:: python
