@@ -146,18 +146,22 @@ Installation
 
 .. toctree::
 	:maxdepth: 3
-	:caption: API Reference
 	:glob:
 
 	api/coincidence
 	api/*
 
-.. toctree::
-	:maxdepth: 3
-	:caption: Contributing
 
-	contributing
-	Source
+.. only:: html
+
+	.. toctree::
+		:caption: Links
+		:hidden:
+
+		GitHub <https://github.com/python-coincidence/coincidence>
+		PyPI <https://pypi.org/project/coincidence>
+		Contributing Guide <https://contributing-to-coincidence.readthedocs.io/en/latest/>
+		Source
 
 .. start links
 

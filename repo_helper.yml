@@ -18,6 +18,7 @@ python_deploy_version: 3.6
 min_coverage: 100
 requires_python: 3.6
 use_whey: true
+preserve_custom_theme: true
 
 python_versions:
  - '3.6'
@@ -58,3 +59,6 @@ extra_sphinx_extensions:
 #entry_points:
 # pytest11:
 #  - "coincidence = coincidence"
+
+exclude_files:
+ - contributing
