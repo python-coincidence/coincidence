@@ -3,6 +3,16 @@
 #  fixtures.py
 """
 Pytest fixtures.
+
+To enable the fixtures add the following to ``conftest.py`` in your test directory:
+
+.. code-block:: python
+
+	pytest_plugins = ("coincidence", )
+
+See `the pytest documentation`_ for more information.
+
+.. _the pytest documentation: https://pytest.org/en/latest/how-to/plugins.html
 """
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
