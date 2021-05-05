@@ -82,7 +82,7 @@ def pytest_report_header(config, startdir):
 	return f"Test session started at {datetime.datetime.now():%H:%M:%S}"
 
 
-PEP_563: bool = (sys.version_info[:2] >= (3, 10))
+PEP_563: bool = (sys.version_info[:2] >= (3, 11))
 """
 :py:obj:`True` if the current Python version implements :pep:`563` -- Postponed Evaluation of Annotations.
 """
