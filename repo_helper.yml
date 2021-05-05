@@ -55,6 +55,7 @@ intersphinx_mapping:
 
 extra_sphinx_extensions:
  - sphinx_autofixture
+ - html_section
 
 #entry_points:
 # pytest11:
