@@ -139,8 +139,8 @@ Installation
 
 .. end installation
 
-Contents
----------
+API Reference
+----------------
 
 .. html-section::
 
@@ -157,16 +157,13 @@ Contents
 	api/*
 
 
-.. only:: html
+.. sidebar-links::
+	:caption: Links
+	:github:
+	:pypi: sphinx-toolbox
 
-	.. toctree::
-		:caption: Links
-		:hidden:
-
-		GitHub <https://github.com/python-coincidence/coincidence>
-		PyPI <https://pypi.org/project/coincidence>
-		Contributing Guide <https://contributing-to-coincidence.readthedocs.io/en/latest/>
-		Source
+	Contributing Guide <https://contributing-to-coincidence.readthedocs.io/en/latest/>
+	Source
 
 .. start links
 

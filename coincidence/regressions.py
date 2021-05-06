@@ -282,6 +282,10 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
 		.. seealso:: :meth:`~.check_file_regression`
+
+		.. raw:: latex
+
+			\clearpage
 		"""
 
 		__tracebackhide__ = True

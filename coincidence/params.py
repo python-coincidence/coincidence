@@ -44,7 +44,7 @@ from domdf_python_tools.iterative import extend_with_none
 from coincidence.selectors import _make_version, only_version
 from coincidence.utils import generate_falsy_values, generate_truthy_values, whitespace_perms_list
 
-__all__ = ["count", "testing_boolean_values", "whitespace_perms", "param", "parametrized_versions"]
+__all__ = ["count", "whitespace_perms", "testing_boolean_values", "param", "parametrized_versions"]
 
 MarkDecorator.__module__ = "_pytest.mark"
 
@@ -56,15 +56,15 @@ def testing_boolean_values(
 		) -> MarkDecorator:
 	"""
 	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
-	decorator that provides a list of strings, integers and booleans, and the boolean representations of them.
+	decorator which provides a list of strings, integers and booleans, and the boolean representations of them.
 
 	The parametrized arguments are ``boolean_string`` for the input value,
 	and ``expected_boolean`` for the expected output.
 
 	Optionally, a random selection of the values can be returned using the ``ratio`` argument.
 
-	:param extra_truthy: Additional values that should be considered :py:obj:`True`.
-	:param extra_falsy: Additional values that should be considered :py:obj:`False`.
+	:param extra_truthy: Additional values to treat as :py:obj:`True`.
+	:param extra_falsy: Additional values to treat as :py:obj:`False`.
 	:param ratio: The ratio of the number of values to select to the total number of values.
 	"""  # noqa D400
 
@@ -82,7 +82,7 @@ def testing_boolean_values(
 def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 	r"""
 	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
-	decorator that provides permutations of whitespace (strictly only ``␣\n\t\r``).
+	decorator which provides permutations of whitespace (strictly only ``␣\n\t\r``).
 	Not all permutations are returned, as there are a lot of them;
 	instead a random selection of the permutations is returned.
 	By default ½ of the permutations are returned, but this can be configured using the ``ratio`` argument.
@@ -99,7 +99,7 @@ def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 def count(stop: int, start: int = 0, step: int = 1) -> MarkDecorator:
 	"""
 	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
-	decorator that provides a list of numbers between ``start`` and ``stop`` with an interval of ``step``.
+	decorator which provides a list of numbers between ``start`` and ``stop`` with an interval of ``step``.
 
 	The single parametrized argument is ``count``.
 
@@ -145,6 +145,8 @@ def param(
 	r"""
 	Specify a parameter in `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
 	calls or :ref:`parametrized fixtures <fixture-parametrize-marks>`.
+
+	**Examples:**
 
 	.. code-block:: python
 
@@ -192,7 +194,12 @@ def parametrized_versions(
 
 		@pytest.mark.parametrize(
 			"version",
-			parametrized_versions(3.6, 3.7, 3.8, reason="Output differs on each version."),
+			parametrized_versions(
+				3.6,
+				3.7,
+				3.8,
+				reason="Output differs on each version.",
+				),
 			)
 		def test_something(version: str):
 			pass
@@ -201,7 +208,12 @@ def parametrized_versions(
 	.. code-block:: python
 
 		@pytest.fixture(
-			params=parametrized_versions(3.6, 3.7, 3.8, reason="Output differs on each version."),
+			params=parametrized_versions(
+				3.6,
+				3.7,
+				3.8,
+				reason="Output differs on each version.",
+				),
 			)
 		def version(request):
 			return request.param

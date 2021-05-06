@@ -27,6 +27,7 @@ Pytest decorators for selectively running tests.
 #
 
 # stdlib
+import inspect
 import sys
 from textwrap import dedent
 from typing import Callable, Optional, Tuple, Union, cast
@@ -72,7 +73,7 @@ def min_version(
 		reason: Optional[str] = None,
 		) -> MarkDecorator:
 	"""
-	Factory function to return a ``@pytest.mark.skipif`` decorator that will
+	Factory function to return a ``@pytest.mark.skipif`` decorator which will
 	skip a test if the current Python version is less than the required one.
 
 	:param version: The version number to compare to :py:data:`sys.version_info`.
@@ -93,7 +94,7 @@ def max_version(
 		reason: Optional[str] = None,
 		) -> MarkDecorator:
 	"""
-	Factory function to return a ``@pytest.mark.skipif`` decorator that will
+	Factory function to return a ``@pytest.mark.skipif`` decorator which will
 	skip a test if the current Python version is greater than the required one.
 
 	:param version: The version number to compare to :py:data:`sys.version_info`.
@@ -114,7 +115,7 @@ def only_version(
 		reason: Optional[str] = None,
 		) -> MarkDecorator:
 	"""
-	Factory function to return a ``@pytest.mark.skipif`` decorator that will
+	Factory function to return a ``@pytest.mark.skipif`` decorator which will
 	skip a test if the current Python version not the required one.
 
 	:param version: The version number to compare to :py:data:`sys.version_info`.
@@ -160,7 +161,7 @@ def platform_boolean_factory(
 
 	docstring = dedent(
 			"""\
-Factory function to return a ``@pytest.mark.skipif`` decorator that will
+Factory function to return a ``@pytest.mark.skipif`` decorator which will
 skip a test {why} the current platform is {platform}.
 
 :param reason: The reason to display when skipping.
@@ -196,4 +197,12 @@ only_docker.__doc__ = cast(str, only_docker.__doc__).replace("the current platfo
 
 not_pypy, only_pypy = platform_boolean_factory(condition=PYPY, platform="PyPy")
 not_pypy.__doc__ = cast(str, not_pypy.__doc__).replace("current platform", "current Python implementation")
-only_pypy.__doc__ = cast(str, only_pypy.__doc__).replace("current platform", "current Python implementation")
+only_pypy.__doc__ = f"""\
+{inspect.cleandoc(only_pypy.__doc__ or '').replace("current platform", "current Python implementation")}
+
+:rtype:
+
+.. raw:: latex
+
+	\\clearpage
+"""

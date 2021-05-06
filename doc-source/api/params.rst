@@ -3,3 +3,4 @@
 =============================
 
 .. automodule:: coincidence.params
+	:member-order: bysource

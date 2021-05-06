@@ -45,10 +45,10 @@ from domdf_python_tools.iterative import Len
 from domdf_python_tools.paths import PathPlus
 
 __all__ = [
-		"is_docker",
-		"with_fixed_datetime",
 		"generate_truthy_values",
 		"generate_falsy_values",
+		"is_docker",
+		"with_fixed_datetime",
 		"whitespace",
 		"whitespace_perms_list",
 		]
@@ -61,11 +61,8 @@ _dockerenv = "/.dockerenv"
 
 def is_docker() -> bool:
 	"""
-	Is this current environment running in docker?
-
-	>>> type(is_docker())
-	<class 'bool'>
-	"""  # noqa: D400
+	Returns whether the current Python instance is running in Docker.
+	"""
 
 	if os.path.exists(_dockerenv):
 		return True
