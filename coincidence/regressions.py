@@ -133,7 +133,7 @@ def check_file_regression(
 	:param \*\*kwargs: Additional keyword arguments passed to
 		:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
-	.. seealso:: :meth:`.AdvancedFileRegression.check`
+	.. seealso:: :meth:`.AdvancedFileRegressionFixture.check`
 	"""
 
 	__tracebackhide__ = True
@@ -164,7 +164,7 @@ def check_file_output(
 	:param \*\*kwargs: Additional keyword arguments passed to
 		:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
-	.. seealso:: :meth:`.AdvancedFileRegression.check_file`
+	.. seealso:: :meth:`.AdvancedFileRegressionFixture.check_file`
 	"""
 
 	filename = PathPlus(filename)
@@ -205,7 +205,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 	* :class:`collections.Counter`, :class:`typing.Counter`
 	* :class:`types.MappingProxyType` (cannot be subclassed)
 	* :class:`_pytest.capture.CaptureResult` (the type of :meth:`capsys.readouterr() <pytest.CaptureFixture.readouterr>`)
-	* Any type which implements the :protocol:`SupportsAsDict` protocol (including :class:`collections.namedtuple` and :class:`typing.NamedTuple`)
+	* Any type which implements the :protocol:`SupportsAsDict` protocol (including :func:`collections.namedtuple` and :class:`typing.NamedTuple`)
 	"""
 
 	def check(
@@ -281,7 +281,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		:param \*\*kwargs: Additional keyword arguments passed to
 			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
-		.. seealso:: :meth:`~.check_file_regression`
+		.. seealso:: :func:`~.check_file_regression`
 
 		.. raw:: latex
 
@@ -344,7 +344,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		:param \*\*kwargs: Additional keyword arguments passed to
 			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
-		.. seealso:: :meth:`~.check_file_output`
+		.. seealso:: :func:`~.check_file_output`
 		"""
 
 		filename = PathPlus(filename)
@@ -362,10 +362,16 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 
 @pytest.fixture()
 def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:
-	"""
+	r"""
 	Pytest fixture for performing regression tests on strings, bytes and files.
 
 	.. versionadded:: 0.2.0
+
+	:rtype:
+
+	.. raw:: latex
+
+		\clearpage
 	"""
 
 	return AdvancedFileRegressionFixture(datadir, original_datadir, request)

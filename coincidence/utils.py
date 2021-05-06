@@ -83,7 +83,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 
 	:param fixed_datetime:
 
-	.. seealso:: The :fixture:`fixed_datetime` fixture.
+	.. seealso:: The :fixture:`~.fixed_datetime` fixture.
 
 	.. attention::
 

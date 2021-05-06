@@ -56,7 +56,7 @@ __all__ = ["fixed_datetime", "original_datadir", "tmp_pathplus", "path_separator
 @pytest.fixture()
 def tmp_pathplus(tmp_path: Path) -> PathPlus:
 	"""
-	Pytest fixture that returns a temporary directory in the form of a
+	Pytest fixture which returns a temporary directory in the form of a
 	:class:`~domdf_python_tools.paths.PathPlus` object.
 
 	The directory is unique to each test function invocation,
@@ -86,7 +86,7 @@ def fixed_datetime(monkeypatch):
 	"""
 	Pytest fixture to pretend the current datetime is 2:20 AM on 13th October 2020.
 
-	.. seealso:: The :func:`with_fixed_datetime` contextmanager.
+	.. seealso:: The :func:`~.with_fixed_datetime` contextmanager.
 
 	.. attention::
 

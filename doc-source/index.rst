@@ -8,10 +8,6 @@ coincidence
 
 .. end short_desc
 
-.. only:: html
-
-	Formerly known as :mod:`domdf_python_tools.testing`.
-
 .. start shields
 
 .. only:: html
