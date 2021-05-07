@@ -167,6 +167,6 @@ API Reference
 
 	View the :ref:`Function Index <genindex>` or browse the `Source Code <_modules/index.html>`__.
 
-	`Browse the GitHub Repository <https://github.com/python-coincidence/coincidence>`__
+	:github:repo:`Browse the GitHub Repository <python-coincidence/coincidence>`
 
 .. end links
