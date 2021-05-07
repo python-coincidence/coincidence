@@ -29,7 +29,6 @@ class CoincidenceProtocolDocumenter(ProtocolDocumenter):
 		for (membername, member) in members:
 			# if isattr is True, the member is documented as an attribute
 
-
 			if safe_getattr(member, "__sphinx_mock__", False):
 				# mocked module or object
 				keep = False  # pragma: no cover
