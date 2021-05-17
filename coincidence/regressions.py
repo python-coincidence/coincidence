@@ -210,7 +210,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 	.. clearpage::
 	.. autoclasssumm:: AdvancedDataRegressionFixture
 		:autosummary-sections: ;;
-	"""
+	"""  # noqa: RST303
 
 	def check(
 			self,

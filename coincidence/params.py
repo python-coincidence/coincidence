@@ -172,6 +172,7 @@ def param(
 	:param key: A callable which is given ``values`` (as a :class:`tuple`) and returns the value to use as the id.
 
 	:rtype:
+
 	.. clearpage::
 	"""  # noqa: D400
 
