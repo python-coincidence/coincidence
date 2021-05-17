@@ -3,3 +3,4 @@
 ===============================
 
 .. automodule:: coincidence.selectors
+	:member-order: bysource

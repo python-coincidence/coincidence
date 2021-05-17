@@ -3,6 +3,8 @@
 #  selectors.py
 """
 Pytest decorators for selectively running tests.
+
+.. autosummary-widths:: 7/16 9/16
 """
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -42,8 +44,8 @@ from domdf_python_tools.versions import Version
 from coincidence.utils import is_docker
 
 __all__ = [
-		"max_version",
 		"min_version",
+		"max_version",
 		"only_version",
 		"not_windows",
 		"only_windows",
@@ -164,25 +166,38 @@ def platform_boolean_factory(
 Factory function to return a ``@pytest.mark.skipif`` decorator which will
 skip a test {why} the current platform is {platform}.
 
+{versionadded_string}
 :param reason: The reason to display when skipping.
 """
 			)
 
 	if versionadded:
-		docstring += f"\n\n:rtype:\n\n.. versionadded:: {versionadded}"
+		versionadded_string = f".. versionadded:: {versionadded}\n"
+	else:
+		versionadded_string = ''
 
 	not_function.__name__ = not_function.__qualname__ = f"not_{platform.lower()}"
 	not_function.__module__ = module
-	not_function.__doc__ = docstring.format(why="if", platform=platform)
+	not_function.__doc__ = docstring.format(why="if", platform=platform, versionadded_string=versionadded_string)
 
 	only_function.__name__ = only_function.__qualname__ = f"only_{platform.lower()}"
 	only_function.__module__ = module
-	only_function.__doc__ = docstring.format(why="unless", platform=platform)
+	only_function.__doc__ = docstring.format(
+			why="unless", platform=platform, versionadded_string=versionadded_string
+			)
 
 	return not_function, only_function
 
 
 not_windows, only_windows = platform_boolean_factory(condition=sys.platform == "win32", platform="Windows")
+only_windows.__doc__ = f"""\
+{inspect.cleandoc(only_windows.__doc__ or '')}
+
+:rtype:
+
+.. latex:clearpage::
+"""
+
 not_macos, only_macos = platform_boolean_factory(condition=sys.platform == "darwin", platform="macOS")
 
 not_linux, only_linux = platform_boolean_factory(
@@ -190,6 +205,13 @@ not_linux, only_linux = platform_boolean_factory(
 		platform="Linux",
 		versionadded="0.2.0"
 		)
+not_linux.__doc__ = f"""\
+{inspect.cleandoc(not_linux.__doc__ or '')}
+
+:rtype:
+
+.. latex:clearpage::
+"""
 
 not_docker, only_docker = platform_boolean_factory(condition=is_docker(), platform="Docker")
 not_docker.__doc__ = cast(str, not_docker.__doc__).replace("the current platform is", "running on")
@@ -197,12 +219,4 @@ only_docker.__doc__ = cast(str, only_docker.__doc__).replace("the current platfo
 
 not_pypy, only_pypy = platform_boolean_factory(condition=PYPY, platform="PyPy")
 not_pypy.__doc__ = cast(str, not_pypy.__doc__).replace("current platform", "current Python implementation")
-only_pypy.__doc__ = f"""\
-{inspect.cleandoc(only_pypy.__doc__ or '').replace("current platform", "current Python implementation")}
-
-:rtype:
-
-.. raw:: latex
-
-	\\clearpage
-"""
+only_pypy.__doc__ = cast(str, only_pypy.__doc__).replace("current platform", "current Python implementation")

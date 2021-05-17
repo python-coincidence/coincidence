@@ -3,3 +3,4 @@
 ===============================
 
 .. automodule:: coincidence.regressions
+	:member-order: bysource

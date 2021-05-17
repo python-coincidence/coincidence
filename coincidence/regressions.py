@@ -49,13 +49,13 @@ from pytest_regressions.file_regression import FileRegressionFixture
 from typing_extensions import Protocol, runtime_checkable
 
 __all__ = [
-		"check_file_output",
-		"check_file_regression",
-		"SupportsAsDict",
 		"AdvancedDataRegressionFixture",
-		"advanced_data_regression",
 		"AdvancedFileRegressionFixture",
+		"SupportsAsDict",
+		"advanced_data_regression",
 		"advanced_file_regression",
+		"check_file_regression",
+		"check_file_output",
 		]
 
 _C = TypeVar("_C", bound=Callable)
@@ -206,6 +206,10 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 	* :class:`types.MappingProxyType` (cannot be subclassed)
 	* :class:`_pytest.capture.CaptureResult` (the type of :meth:`capsys.readouterr() <pytest.CaptureFixture.readouterr>`)
 	* Any type which implements the :protocol:`SupportsAsDict` protocol (including :func:`collections.namedtuple` and :class:`typing.NamedTuple`)
+
+	.. clearpage::
+	.. autoclasssumm:: AdvancedDataRegressionFixture
+		:autosummary-sections: ;;
 	"""
 
 	def check(
@@ -282,10 +286,6 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 			:meth:`pytest_regressions.file_regression.FileRegressionFixture.check`.
 
 		.. seealso:: :func:`~.check_file_regression`
-
-		.. raw:: latex
-
-			\clearpage
 		"""
 
 		__tracebackhide__ = True
@@ -367,11 +367,6 @@ def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFile
 
 	.. versionadded:: 0.2.0
 
-	:rtype:
-
-	.. raw:: latex
-
-		\clearpage
 	"""
 
 	return AdvancedFileRegressionFixture(datadir, original_datadir, request)

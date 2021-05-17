@@ -156,7 +156,7 @@ API Reference
 .. sidebar-links::
 	:caption: Links
 	:github:
-	:pypi: sphinx-toolbox
+	:pypi: coincidence
 
 	Contributing Guide <https://contributing-to-coincidence.readthedocs.io/en/latest/>
 	Source

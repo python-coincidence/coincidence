@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 #  fixtures.py
-"""
+r"""
 Pytest fixtures.
 
 To enable the fixtures add the following to ``conftest.py`` in your test directory:
@@ -129,6 +129,10 @@ def path_separator(request) -> str:
 	This is useful when the test output differs on platforms with ``\`` as the path separator, such as windows.
 
 	.. versionadded:: 0.4.0
+
+	:rtype:
+
+	.. clearpage::
 	"""
 
 	return request.param

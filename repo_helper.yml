@@ -57,6 +57,8 @@ extra_sphinx_extensions:
  - sphinx_autofixture
  - html_section
  - internal_autoprotocol
+ - succinct_seealso
+ - autosummary_widths
 
 #entry_points:
 # pytest11:

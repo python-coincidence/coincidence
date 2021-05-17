@@ -82,7 +82,10 @@ def testing_boolean_values(
 def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 	r"""
 	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
-	decorator which provides permutations of whitespace (strictly only ``␣\n\t\r``).
+	decorator which provides permutations of whitespace.
+
+	For this function whitespace is only ``␣\n\t\r``.
+
 	Not all permutations are returned, as there are a lot of them;
 	instead a random selection of the permutations is returned.
 	By default ½ of the permutations are returned, but this can be configured using the ``ratio`` argument.
@@ -167,6 +170,9 @@ def param(
 	:param id: The id to attribute to this parameter set.
 	:param idx: The index of the value in ``*values`` to use as the id.
 	:param key: A callable which is given ``values`` (as a :class:`tuple`) and returns the value to use as the id.
+
+	:rtype:
+	.. clearpage::
 	"""  # noqa: D400
 
 	if len([x for x in (id, idx, key) if x is not None]) > 1:
