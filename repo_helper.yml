@@ -55,10 +55,10 @@ intersphinx_mapping:
 
 extra_sphinx_extensions:
  - sphinx_autofixture
- - html_section
+ - sphinx_toolbox_experimental.html_section
  - internal_autoprotocol
- - succinct_seealso
- - autosummary_widths
+ - sphinx_toolbox_experimental.succinct_seealso
+ - sphinx_toolbox_experimental.autosummary_widths
 
 #entry_points:
 # pytest11:
