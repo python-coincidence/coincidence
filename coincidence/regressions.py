@@ -200,7 +200,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 	The following types and their subclasses are supported:
 
 	* :class:`collections.abc.Mapping`, :class:`typing.Mapping` (including :class:`dict` and :class:`typing.Dict`)
-	* :class:`collections.abc.Sequence`, :class:`typing.Sequence` (including :class:`list`, :class:`typing.Tuple` etc.)
+	* :class:`collections.abc.Sequence`, :class:`typing.Sequence` (including :class:`list`, :py:obj:`typing.Tuple` etc.)
 	* :class:`collections.OrderedDict`, :class:`typing.OrderedDict`
 	* :class:`collections.Counter`, :class:`typing.Counter`
 	* :class:`types.MappingProxyType` (cannot be subclassed)

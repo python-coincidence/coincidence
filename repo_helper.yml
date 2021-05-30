@@ -59,6 +59,7 @@ extra_sphinx_extensions:
  - internal_autoprotocol
  - sphinx_toolbox_experimental.succinct_seealso
  - sphinx_toolbox_experimental.autosummary_widths
+ - sphinx_toolbox_experimental.needspace
 
 #entry_points:
 # pytest11:
