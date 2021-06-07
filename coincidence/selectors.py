@@ -3,8 +3,6 @@
 #  selectors.py
 """
 Pytest decorators for selectively running tests.
-
-.. autosummary-widths:: 7/16 9/16
 """  # noqa: RST303
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>

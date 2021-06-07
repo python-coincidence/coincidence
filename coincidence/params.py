@@ -81,7 +81,7 @@ def testing_boolean_values(
 
 def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 	r"""
-	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`_
+	Returns a `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
 	decorator which provides permutations of whitespace.
 
 	For this function whitespace is only ``␣\n\t\r``.
