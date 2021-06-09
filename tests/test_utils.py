@@ -10,6 +10,8 @@ from domdf_python_tools.paths import PathPlus
 import coincidence
 from coincidence.utils import generate_falsy_values, generate_truthy_values, with_fixed_datetime
 
+original_datetime = datetime.datetime
+
 
 def test_generate_truthy_values():
 	random.seed(1234)
@@ -116,6 +118,9 @@ def test_with_fixed_datetime(fake_datetime, expected_date: datetime.datetime):
 		assert datetime.date.__name__ == "date"
 		assert datetime.date.__qualname__ == "date"
 		assert datetime.date.__module__ == "datetime"
+
+		datetime.datetime.now() - datetime.datetime(2019, 10, 13, 2, 20)
+		datetime.datetime.now() - original_datetime(2019, 10, 13, 2, 20)
 
 
 def test_is_docker(monkeypatch, tmp_pathplus: PathPlus):

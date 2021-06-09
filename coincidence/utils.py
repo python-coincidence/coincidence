@@ -41,6 +41,7 @@ from typing import Iterable, Iterator, List, Optional, Sequence, TypeVar, Union
 
 # 3rd party
 import pytest
+from domdf_python_tools.compat import PYPY
 from domdf_python_tools.iterative import Len
 from domdf_python_tools.paths import PathPlus
 
@@ -97,42 +98,69 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 		Using ``from datetime import datetime`` won't work.
 	"""
 
-	class D(datetime.date):
+	if PYPY:  # pragma: no cover (!PyPy)
 
-		@classmethod
-		def today(cls):
-			return datetime.date(
-					fixed_datetime.year,
-					fixed_datetime.month,
-					fixed_datetime.day,
+		with pytest.MonkeyPatch.context() as monkeypatch:
+			monkeypatch.setattr(
+					datetime.date,
+					"today",
+					lambda *args: datetime.date(
+							fixed_datetime.year,
+							fixed_datetime.month,
+							fixed_datetime.day,
+							)
 					)
-
-	class DT(datetime.datetime):
-
-		@classmethod
-		def today(cls):
-			return datetime.datetime(
-					fixed_datetime.year,
-					fixed_datetime.month,
-					fixed_datetime.day,
+			monkeypatch.setattr(
+					datetime.datetime,
+					"today",
+					lambda *args: datetime.datetime(
+							fixed_datetime.year,
+							fixed_datetime.month,
+							fixed_datetime.day,
+							)
 					)
+			monkeypatch.setattr(datetime.datetime, "now", lambda *args: fixed_datetime)
 
-		@classmethod
-		def now(cls, tz: Optional[datetime.tzinfo] = None):
-			return datetime.datetime.fromtimestamp(fixed_datetime.timestamp())
+			yield
 
-	D.__name__ = "date"
-	D.__qualname__ = "date"
-	DT.__qualname__ = "datetime"
-	DT.__name__ = "datetime"
-	D.__module__ = "datetime"
-	DT.__module__ = "datetime"
+	else:  # pragma: no cover (PyPy)
 
-	with pytest.MonkeyPatch.context() as monkeypatch:
-		monkeypatch.setattr(datetime, "date", D)
-		monkeypatch.setattr(datetime, "datetime", DT)
+		class D(datetime.date):
 
-		yield
+			@classmethod
+			def today(cls):
+				return datetime.date(
+						fixed_datetime.year,
+						fixed_datetime.month,
+						fixed_datetime.day,
+						)
+
+		class DT(datetime.datetime):
+
+			@classmethod
+			def today(cls):
+				return datetime.datetime(
+						fixed_datetime.year,
+						fixed_datetime.month,
+						fixed_datetime.day,
+						)
+
+			@classmethod
+			def now(cls, tz: Optional[datetime.tzinfo] = None):
+				return datetime.datetime.fromtimestamp(fixed_datetime.timestamp())
+
+		D.__name__ = "date"
+		D.__qualname__ = "date"
+		DT.__qualname__ = "datetime"
+		DT.__name__ = "datetime"
+		D.__module__ = "datetime"
+		DT.__module__ = "datetime"
+
+		with pytest.MonkeyPatch.context() as monkeypatch:
+			monkeypatch.setattr(datetime, "date", D)
+			monkeypatch.setattr(datetime, "datetime", DT)
+
+			yield
 
 
 def generate_truthy_values(
