@@ -16,5 +16,5 @@ __all__ = [
 		"extras_require",
 		]
 
-__version__ = "0.4.2"
+__version__ = "0.4.3"
 extras_require = {}

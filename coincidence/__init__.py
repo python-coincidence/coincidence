@@ -68,7 +68,7 @@ from coincidence.utils import (
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020-2021 Dominic Davis-Foster"
 __license__: str = "MIT License"
-__version__: str = "0.4.2"
+__version__: str = "0.4.3"
 __email__: str = "dominic@davis-foster.co.uk"
 
 __all__ = ["pytest_report_header", "PEP_563"]
