@@ -101,7 +101,7 @@ coincidence
 .. |language| image:: https://img.shields.io/github/languages/top/python-coincidence/coincidence
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/python-coincidence/coincidence/v0.4.3
+.. |commits-since| image:: https://img.shields.io/github/commits-since/python-coincidence/coincidence/v0.5.0
 	:target: https://github.com/python-coincidence/coincidence/pulse
 	:alt: GitHub commits since tagged version
 
