@@ -153,6 +153,11 @@ API Reference
 	api/coincidence
 	api/*
 
+.. toctree::
+	:maxdepth: 2
+
+	changelog
+
 
 .. sidebar-links::
 	:caption: Links

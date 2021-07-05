@@ -48,6 +48,7 @@ keywords:
 sphinx_conf_epilogue:
  - toctree_plus_types.add("fixture")
  - html_logo = "../coincidence.png"
+ - latex_elements["preamble"] = "\\usepackage{soul}"
 
 intersphinx_mapping:
  - "'pytest': ('https://docs.pytest.org/en/stable', None)"
@@ -57,9 +58,11 @@ extra_sphinx_extensions:
  - sphinx_autofixture
  - sphinx_toolbox_experimental.html_section
  - internal_autoprotocol
+ - local_extension
  - sphinx_toolbox_experimental.succinct_seealso
  - sphinx_toolbox_experimental.autosummary_widths
  - sphinx_toolbox_experimental.needspace
+ - sphinx_toolbox_experimental.changelog
 
 #entry_points:
 # pytest11:
