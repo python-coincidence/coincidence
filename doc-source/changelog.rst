@@ -2,6 +2,13 @@
 Changelog
 ===============
 
+0.5.0
+----------
+
+* :meth:`coincidence.regressions.AdvancedDataRegressionFixture` -- Add support for :mod:`pathlib`
+  and :class:`domdf_python_tools.paths.PathPlus`.
+
+
 0.4.3
 -------------
 

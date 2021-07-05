@@ -1,4 +1,5 @@
 # stdlib
+import pathlib
 import sys
 from collections import ChainMap, Counter, OrderedDict, defaultdict, namedtuple
 from types import MappingProxyType
@@ -95,6 +96,11 @@ some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
 						),
 				pytest.param(CustomMapping({'a': Count(a=1, b=2, c=3)}), id="Nested_CustomMapping_NamedTuple"),
 				pytest.param(toml.loads(some_toml)["section"]["table"], id="Toml_InlineTableDict"),
+				pytest.param(pathlib.PurePath("/foo/bar/baz"), id="pathlib_purepath"),
+				pytest.param(pathlib.PurePosixPath("/foo/bar/baz"), id="pathlib_pureposixpath"),
+				pytest.param(pathlib.PureWindowsPath(r"c:\foo\bar\baz"), id="pathlib_purewindowspath"),
+				pytest.param(pathlib.Path("/foo/bar/baz"), id="pathlib_path"),
+				pytest.param(PathPlus("/foo/bar/baz"), id="pathplus"),
 				]
 		)
 def test_advanced_data_regression(advanced_data_regression, data):

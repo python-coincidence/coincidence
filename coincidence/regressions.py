@@ -32,6 +32,7 @@ Regression test helpers.
 
 # stdlib
 import collections
+import pathlib
 from collections import ChainMap, Counter, OrderedDict, defaultdict
 from contextlib import suppress
 from functools import partial
@@ -104,6 +105,11 @@ try:
 		import toml
 
 		_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
+
+	@_representer_for(pathlib.PurePath, pathlib.PurePosixPath, pathlib.PureWindowsPath, pathlib.Path, PathPlus,)
+	def _represent_pathlib(dumper: RegressionYamlDumper, data: pathlib.PurePath):
+		return dumper.represent_str(data.as_posix())
+
 
 except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
