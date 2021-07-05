@@ -104,12 +104,17 @@ try:
 		# 3rd party
 		import toml
 
-		_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)  # type: ignore
+		_representer_for(toml.decoder.InlineTableDict)(_represent_mappings)
 
-	@_representer_for(pathlib.PurePath, pathlib.PurePosixPath, pathlib.PureWindowsPath, pathlib.Path, PathPlus,)
+	@_representer_for(
+			pathlib.PurePath,
+			pathlib.PurePosixPath,
+			pathlib.PureWindowsPath,
+			pathlib.Path,
+			PathPlus,
+			)
 	def _represent_pathlib(dumper: RegressionYamlDumper, data: pathlib.PurePath):
 		return dumper.represent_str(data.as_posix())
-
 
 except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
@@ -216,7 +221,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 	.. clearpage::
 	.. autoclasssumm:: AdvancedDataRegressionFixture
 		:autosummary-sections: ;;
-	"""  # noqa: RST303
+	"""
 
 	def check(
 			self,

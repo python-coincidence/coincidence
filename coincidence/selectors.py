@@ -3,7 +3,7 @@
 #  selectors.py
 """
 Pytest decorators for selectively running tests.
-"""  # noqa: RST303
+"""
 #
 #  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
