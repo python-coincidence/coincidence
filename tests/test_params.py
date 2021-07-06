@@ -7,6 +7,7 @@ from typing import no_type_check
 # 3rd party
 import pytest
 from _pytest.mark import Mark, MarkDecorator, ParameterSet
+from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.utils import strtobool
 
 # this package
@@ -78,6 +79,8 @@ def test_param():
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
 		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore
+
+	assert param(PathPlus("code.py"), key=lambda t: t[0].name).id == "code.py"
 
 
 @no_type_check

@@ -33,7 +33,7 @@
 # stdlib
 import itertools
 import random
-from typing import Callable, Collection, Iterable, List, Optional, Sequence, Tuple, Union, cast, overload
+from typing import Callable, Collection, Iterable, List, Optional, Sequence, Tuple, TypeVar, Union, cast, overload
 
 # 3rd party
 import pytest
@@ -46,6 +46,7 @@ from coincidence.utils import generate_falsy_values, generate_truthy_values, whi
 
 __all__ = ["count", "whitespace_perms", "testing_boolean_values", "param", "parametrized_versions"]
 
+_T = TypeVar("_T")
 MarkDecorator.__module__ = "_pytest.mark"
 
 
@@ -132,18 +133,18 @@ def param(
 
 @overload
 def param(
-		*values: object,
+		*values: _T,
 		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
-		key: Optional[Callable[[Tuple[object, ...]], str]],  # noqa: A002  # pylint: disable=redefined-builtin
+		key: Optional[Callable[[Tuple[_T, ...]], str]],  # noqa: A002  # pylint: disable=redefined-builtin
 		) -> ParameterSet: ...
 
 
 def param(
-		*values: object,
+		*values: _T,
 		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
 		id: Optional[str] = None,  # noqa: A002  # pylint: disable=redefined-builtin
 		idx: Optional[int] = None,
-		key: Optional[Callable[[Tuple[object, ...]], str]] = None,
+		key: Optional[Callable[[Tuple[_T, ...]], str]] = None,
 		) -> ParameterSet:
 	r"""
 	Specify a parameter in `pytest.mark.parametrize <https://docs.pytest.org/en/stable/parametrize.html>`__
