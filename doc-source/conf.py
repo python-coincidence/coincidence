@@ -77,3 +77,4 @@ def setup(app):
 toctree_plus_types.add("fixture")
 html_logo = "../coincidence.png"
 latex_elements["preamble"] = "\\usepackage{soul}"
+changelog_sections_numbered = False
