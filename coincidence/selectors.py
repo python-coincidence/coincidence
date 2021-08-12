@@ -79,7 +79,7 @@ def min_version(
 	:param version: The version number to compare to :py:data:`sys.version_info`.
 	:param reason: The reason to display when skipping.
 	:default reason: :file:`'Requires Python {<version>} or greater.'`
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	version_ = _make_version(version)
 
@@ -100,7 +100,7 @@ def max_version(
 	:param version: The version number to compare to :py:data:`sys.version_info`.
 	:param reason: The reason to display when skipping.
 	:default reason: :file:`'Not needed after Python {<version>}.'`
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	version_ = _make_version(version)
 
@@ -121,7 +121,7 @@ def only_version(
 	:param version: The version number to compare to :py:data:`sys.version_info`.
 	:param reason: The reason to display when skipping.
 	:default reason: :file:`'Not needed on Python {<version>}.'`
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	version_ = _make_version(version)
 

@@ -123,6 +123,7 @@ coincidence
 
 .. end shields
 
+
 Installation
 ---------------
 
@@ -136,10 +137,12 @@ Installation
 
 .. end installation
 
+
 API Reference
 ----------------
 
 .. html-section::
+
 
 .. toctree::
 	:hidden:
@@ -158,7 +161,6 @@ API Reference
 
 	changelog
 
-
 .. sidebar-links::
 	:caption: Links
 	:github:
@@ -166,6 +168,7 @@ API Reference
 
 	Contributing Guide <https://contributing-to-coincidence.readthedocs.io/en/latest/>
 	Source
+	license
 
 .. start links
 

@@ -67,7 +67,7 @@ def testing_boolean_values(
 	:param extra_truthy: Additional values to treat as :py:obj:`True`.
 	:param extra_falsy: Additional values to treat as :py:obj:`False`.
 	:param ratio: The ratio of the number of values to select to the total number of values.
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	truthy = generate_truthy_values(extra_truthy, ratio)
 	falsy = generate_falsy_values(extra_falsy, ratio)
@@ -94,7 +94,7 @@ def whitespace_perms(ratio: float = 0.5) -> MarkDecorator:
 	The single parametrized argument is ``char``.
 
 	:param ratio: The ratio of the number of permutations to select to the total number of permutations.
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	perms = whitespace_perms_list()
 	return pytest.mark.parametrize("char", random.sample(perms, int(len(perms) * ratio)))
@@ -110,7 +110,7 @@ def count(stop: int, start: int = 0, step: int = 1) -> MarkDecorator:
 	:param stop: The stop value passed to :class:`range`.
 	:param start: The start value passed to :class:`range`.
 	:param step: The step passed to :class:`range`.
-	"""  # noqa D400
+	"""  # noqa: D400
 
 	return pytest.mark.parametrize("count", range(start, stop, step))
 
@@ -127,7 +127,7 @@ def param(
 def param(
 		*values: object,
 		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
-		idx: Optional[int],  # noqa: A002  # pylint: disable=redefined-builtin
+		idx: Optional[int],
 		) -> ParameterSet: ...
 
 
@@ -135,7 +135,7 @@ def param(
 def param(
 		*values: _T,
 		marks: Union[MarkDecorator, Collection[Union[MarkDecorator, Mark]]] = (),
-		key: Optional[Callable[[Tuple[_T, ...]], str]],  # noqa: A002  # pylint: disable=redefined-builtin
+		key: Optional[Callable[[Tuple[_T, ...]], str]],
 		) -> ParameterSet: ...
 
 
