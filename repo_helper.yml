@@ -20,6 +20,7 @@ min_coverage: 100
 requires_python: 3.6
 use_whey: true
 preserve_custom_theme: true
+docs_fail_on_warning: true
 
 python_versions:
  - '3.6'
@@ -47,10 +48,17 @@ keywords:
  - regression
 
 sphinx_conf_epilogue:
+ - nitpicky = True
  - toctree_plus_types.add("fixture")
  - html_logo = "../coincidence.png"
  - latex_elements["preamble"] = "\\usepackage{soul}"
  - changelog_sections_numbered = False
+ - ignore_missing_xrefs = [
+ - '    "^pytest_regressions\\.file_regression\\.FileRegressionFixture$",'
+ - '    "^pytest_regressions\\.data_regression\\.DataRegressionFixture$",'
+ - '    "^coincidence\\.(utils|params)\\._T$",'
+ - '    "^_pytest\\.",'
+ - "]"
 
 intersphinx_mapping:
  - "'pytest': ('https://docs.pytest.org/en/stable', None)"
@@ -65,6 +73,7 @@ extra_sphinx_extensions:
  - sphinx_toolbox_experimental.autosummary_widths
  - sphinx_toolbox_experimental.needspace
  - sphinx_toolbox_experimental.changelog
+ - sphinx_toolbox_experimental.missing_xref
 
 #entry_points:
 # pytest11:

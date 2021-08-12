@@ -74,7 +74,14 @@ def setup(app):
 	app.connect("config-inited", lambda app, config: better_header_layout(config))
 
 
+nitpicky = True
 toctree_plus_types.add("fixture")
 html_logo = "../coincidence.png"
 latex_elements["preamble"] = "\\usepackage{soul}"
 changelog_sections_numbered = False
+ignore_missing_xrefs = [
+		"^pytest_regressions\\.file_regression\\.FileRegressionFixture$",
+		"^pytest_regressions\\.data_regression\\.DataRegressionFixture$",
+		"^coincidence\\.(utils|params)\\._T$",
+		"^_pytest\\.",
+		]
