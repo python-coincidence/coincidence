@@ -60,7 +60,8 @@ coincidence
 		:workflow: mypy
 		:alt: mypy status
 
-	.. |requires| requires-io-shield::
+	.. |requires| image:: https://dependency-dash.herokuapp.com/github/python-coincidence/coincidence/badge.svg
+		:target: https://dependency-dash.herokuapp.com/github/python-coincidence/coincidence/
 		:alt: Requirements Status
 
 	.. |coveralls| coveralls-shield::
