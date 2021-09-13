@@ -86,3 +86,9 @@ repos:
        - coincidence
 
 # Custom hooks can be added below this comment
+
+ - repo: https://github.com/python-formate/snippet-fmt
+   rev: v0.1.0
+   hooks:
+    - id: snippet-fmt
+      types_or: [rst]
