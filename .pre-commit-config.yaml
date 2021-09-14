@@ -5,7 +5,7 @@ exclude: ^$
 
 repos:
  - repo: https://github.com/repo-helper/pyproject-parser
-   rev: v0.4.1
+   rev: v0.4.2
    hooks:
     - id: reformat-pyproject
 
@@ -91,4 +91,5 @@ repos:
    rev: v0.1.0
    hooks:
     - id: snippet-fmt
-      types_or: [rst]
+      types_or:
+       - rst
