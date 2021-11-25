@@ -2,6 +2,13 @@
 Changelog
 ===============
 
+0.6.0
+----------
+
+:func:`coincidence.PEP_563` is temporarily set to :py:obj:`False` for all versions until the future of typing PEPs has been determined.
+No released versions of Python currently have :pep:`563` enabled by default.
+
+
 0.5.0
 ----------
 
