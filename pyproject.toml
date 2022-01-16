@@ -7,9 +7,9 @@ name = "coincidence"
 version = "0.6.0"
 description = "Helper functions for pytest."
 readme = "README.rst"
+requires-python = ">=3.6"
 keywords = [ "pytest", "regression", "testing", "unittest", "utilities",]
 dynamic = [ "classifiers", "dependencies",]
-requires-python = ">=3.6"
 
 [[project.authors]]
 name = "Dominic Davis-Foster"
