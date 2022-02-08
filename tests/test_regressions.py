@@ -8,7 +8,7 @@ from typing import Dict, Mapping, NamedTuple, Sequence
 # 3rd party
 import pytest
 import toml
-from domdf_python_tools.compat import PYPY37
+from domdf_python_tools.compat import PYPY37, PYPY38
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
@@ -123,7 +123,7 @@ def test_advanced_data_regression_capsys_nested(advanced_data_regression, capsys
 	advanced_data_regression.check(OrderedDict({'a': capsys.readouterr()}))
 
 
-if PYPY37:
+if PYPY37 or PYPY38:
 	no_such_file_pattern = r"No such file or directory: .*PathPlus\('.*'\)"
 else:
 	no_such_file_pattern = "No such file or directory: '.*'"
