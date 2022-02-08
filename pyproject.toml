@@ -75,7 +75,6 @@ extensions = [
     "seed_intersphinx_mapping",
     "html_section",
     "sphinx_autofixture",
-    "sphinx_toolbox_experimental.html_section",
     "internal_autoprotocol",
     "local_extension",
     "sphinx_toolbox_experimental.succinct_seealso",
