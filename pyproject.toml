@@ -7,8 +7,9 @@ name = "coincidence"
 version = "0.6.0"
 description = "Helper functions for pytest."
 readme = "README.rst"
+requires-python = ">=3.6"
 keywords = [ "pytest", "regression", "testing", "unittest", "utilities",]
-dynamic = [ "requires-python", "classifiers", "dependencies",]
+dynamic = [ "classifiers", "dependencies",]
 
 [[project.authors]]
 name = "Dominic Davis-Foster"
@@ -72,6 +73,7 @@ extensions = [
     "sphinx_debuginfo",
     "sphinx_licenseinfo",
     "seed_intersphinx_mapping",
+    "html_section",
     "sphinx_autofixture",
     "sphinx_toolbox_experimental.html_section",
     "internal_autoprotocol",
