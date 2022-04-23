@@ -77,6 +77,20 @@ def is_docker() -> bool:
 	return False
 
 
+class _DateMeta(type):  # pragma: no cover (PyPy)
+	_date = datetime.date
+
+	def __instancecheck__(self, instance):
+		return isinstance(instance, self._date)
+
+
+class _DatetimeMeta(type):  # pragma: no cover (PyPy)
+	_datetime = datetime.datetime
+
+	def __instancecheck__(self, instance):
+		return isinstance(instance, self._datetime)
+
+
 @contextmanager
 def with_fixed_datetime(fixed_datetime: datetime.datetime):
 	"""
@@ -125,7 +139,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 
 	else:  # pragma: no cover (PyPy)
 
-		class D(datetime.date):
+		class D(datetime.date, metaclass=_DateMeta):
 
 			@classmethod
 			def today(cls):
@@ -135,7 +149,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime):
 						fixed_datetime.day,
 						)
 
-		class DT(datetime.datetime):
+		class DT(datetime.datetime, metaclass=_DatetimeMeta):
 
 			@classmethod
 			def today(cls):

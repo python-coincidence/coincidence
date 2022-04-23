@@ -104,6 +104,9 @@ def test_generate_falsy_values():
 		)
 def test_with_fixed_datetime(fake_datetime, expected_date: datetime.datetime):
 
+	dt = datetime.datetime(2022, 4, 23, 16, 3, 6)
+	d = datetime.date(2022, 4, 23)
+
 	with with_fixed_datetime(fake_datetime):
 		assert datetime.datetime.today() == expected_date
 		assert datetime.datetime.now() == fake_datetime
@@ -121,6 +124,10 @@ def test_with_fixed_datetime(fake_datetime, expected_date: datetime.datetime):
 
 		datetime.datetime.now() - datetime.datetime(2019, 10, 13, 2, 20)
 		datetime.datetime.now() - original_datetime(2019, 10, 13, 2, 20)
+
+		assert isinstance(dt, datetime.datetime)
+		assert isinstance(dt, datetime.date)
+		assert isinstance(d, datetime.date)
 
 
 def test_is_docker(monkeypatch, tmp_pathplus: PathPlus):
