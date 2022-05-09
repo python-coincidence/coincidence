@@ -19,7 +19,6 @@ python_deploy_version: 3.6
 min_coverage: 100
 requires_python: 3.6
 use_whey: true
-preserve_custom_theme: true
 docs_fail_on_warning: true
 
 python_versions:
@@ -51,6 +50,8 @@ keywords:
 
 sphinx_conf_epilogue:
  - nitpicky = True
+ - needspace_amount = r"5\baselineskip"
+ - 'favicons = [{"rel": "icon", "href": "https://python-coincidence.github.io/assets/coincidence.ico",  "sizes": "48x48", "type": "image/vnd.microsoft.icon"}]'
  - toctree_plus_types.add("fixture")
  - html_logo = "../coincidence.png"
  - latex_elements["preamble"] = "\\usepackage{soul}"
@@ -70,9 +71,9 @@ extra_sphinx_extensions:
  - sphinx_autofixture
  - internal_autoprotocol
  - local_extension
- - sphinx_toolbox_experimental.succinct_seealso
- - sphinx_toolbox_experimental.autosummary_widths
- - sphinx_toolbox_experimental.needspace
+ - sphinx-favicon
+ - sphinx_toolbox.latex.succinct_seealso
+ - sphinx_toolbox.more_autosummary.column_widths
  - sphinx_toolbox_experimental.changelog
  - sphinx_toolbox_experimental.missing_xref
 
