@@ -122,8 +122,10 @@ def test_with_fixed_datetime(fake_datetime, expected_date: datetime.datetime):
 		assert datetime.date.__qualname__ == "date"
 		assert datetime.date.__module__ == "datetime"
 
+		# pylint: disable=expression-not-assigned
 		datetime.datetime.now() - datetime.datetime(2019, 10, 13, 2, 20)
 		datetime.datetime.now() - original_datetime(2019, 10, 13, 2, 20)
+		# pylint: enable=expression-not-assigned
 
 		assert isinstance(dt, datetime.datetime)
 		assert isinstance(dt, datetime.date)
