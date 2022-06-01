@@ -45,14 +45,14 @@ from domdf_python_tools.compat import PYPY
 from domdf_python_tools.iterative import Len
 from domdf_python_tools.paths import PathPlus
 
-__all__ = [
+__all__ = (
 		"generate_truthy_values",
 		"generate_falsy_values",
 		"is_docker",
 		"with_fixed_datetime",
 		"whitespace",
 		"whitespace_perms_list",
-		]
+		)
 
 _T = TypeVar("_T")
 

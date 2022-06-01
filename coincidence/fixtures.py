@@ -50,7 +50,7 @@ from coincidence.utils import with_fixed_datetime
 
 __import__("pytest_datadir")
 
-__all__ = ["fixed_datetime", "original_datadir", "tmp_pathplus", "path_separator"]
+__all__ = ("fixed_datetime", "original_datadir", "tmp_pathplus", "path_separator")
 
 
 @pytest.fixture()

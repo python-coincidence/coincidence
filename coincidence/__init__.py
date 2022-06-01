@@ -71,7 +71,7 @@ __license__: str = "MIT License"
 __version__: str = "0.6.2"
 __email__: str = "dominic@davis-foster.co.uk"
 
-__all__ = ["pytest_report_header", "PEP_563"]
+__all__ = ("pytest_report_header", "PEP_563")
 
 
 def pytest_report_header(config, startdir):

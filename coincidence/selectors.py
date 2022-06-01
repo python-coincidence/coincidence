@@ -41,7 +41,7 @@ from domdf_python_tools.versions import Version
 # this package
 from coincidence.utils import is_docker
 
-__all__ = [
+__all__ = (
 		"min_version",
 		"max_version",
 		"only_version",
@@ -56,7 +56,7 @@ __all__ = [
 		"only_linux",
 		"only_docker",
 		"platform_boolean_factory",
-		]
+		)
 
 
 def _make_version(version: Union[str, float, Tuple[int, ...]]) -> Version:

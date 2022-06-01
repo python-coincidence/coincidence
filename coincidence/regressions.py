@@ -49,7 +49,7 @@ from pytest_regressions.common import check_text_files, perform_regression_check
 from pytest_regressions.file_regression import FileRegressionFixture
 from typing_extensions import Protocol, runtime_checkable
 
-__all__ = [
+__all__ = (
 		"AdvancedDataRegressionFixture",
 		"AdvancedFileRegressionFixture",
 		"SupportsAsDict",
@@ -57,7 +57,7 @@ __all__ = [
 		"advanced_file_regression",
 		"check_file_regression",
 		"check_file_output",
-		]
+		)
 
 _C = TypeVar("_C", bound=Callable)
 

@@ -44,7 +44,7 @@ from domdf_python_tools.iterative import extend_with_none
 from coincidence.selectors import _make_version, only_version
 from coincidence.utils import generate_falsy_values, generate_truthy_values, whitespace_perms_list
 
-__all__ = ["count", "whitespace_perms", "testing_boolean_values", "param", "parametrized_versions"]
+__all__ = ("count", "whitespace_perms", "testing_boolean_values", "param", "parametrized_versions")
 
 _T = TypeVar("_T")
 MarkDecorator.__module__ = "_pytest.mark"
@@ -72,7 +72,7 @@ def testing_boolean_values(
 	truthy = generate_truthy_values(extra_truthy, ratio)
 	falsy = generate_falsy_values(extra_falsy, ratio)
 
-	boolean_strings = [
+	boolean_strings = [  # pylint: disable=use-tuple-over-list
 			*itertools.zip_longest(truthy, [], fillvalue=True),
 			*itertools.zip_longest(falsy, [], fillvalue=False),
 			]
