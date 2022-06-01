@@ -73,9 +73,9 @@ def testing_boolean_values(
 	falsy = generate_falsy_values(extra_falsy, ratio)
 
 	boolean_strings = [  # pylint: disable=use-tuple-over-list
-			*itertools.zip_longest(truthy, [], fillvalue=True),
-			*itertools.zip_longest(falsy, [], fillvalue=False),
-			]
+		*itertools.zip_longest(truthy, [], fillvalue=True),
+		*itertools.zip_longest(falsy, [], fillvalue=False),
+		]
 
 	return pytest.mark.parametrize("boolean_string, expected_boolean", boolean_strings)
 
