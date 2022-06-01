@@ -28,12 +28,12 @@ Helper functions for pytest.
 
 # stdlib
 import datetime
-import sys
+# import sys
 
 # this package
-from coincidence.fixtures import fixed_datetime, original_datadir, path_separator, tmp_pathplus
-from coincidence.params import count, testing_boolean_values, whitespace_perms
-from coincidence.regressions import (
+from coincidence.fixtures import fixed_datetime, original_datadir, path_separator, tmp_pathplus  # noqa: F401
+from coincidence.params import count, testing_boolean_values, whitespace_perms  # noqa: F401
+from coincidence.regressions import (  # noqa: F401
 		AdvancedDataRegressionFixture,
 		AdvancedFileRegressionFixture,
 		SupportsAsDict,
@@ -42,7 +42,7 @@ from coincidence.regressions import (
 		check_file_output,
 		check_file_regression
 		)
-from coincidence.selectors import (
+from coincidence.selectors import (  # noqa: F401
 		max_version,
 		min_version,
 		not_docker,
@@ -56,7 +56,7 @@ from coincidence.selectors import (
 		only_windows,
 		platform_boolean_factory
 		)
-from coincidence.utils import (
+from coincidence.utils import (  # noqa: F401
 		generate_falsy_values,
 		generate_truthy_values,
 		is_docker,
