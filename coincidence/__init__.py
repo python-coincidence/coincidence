@@ -28,7 +28,6 @@ Helper functions for pytest.
 
 # stdlib
 import datetime
-# import sys
 
 # this package
 from coincidence.fixtures import fixed_datetime, original_datadir, path_separator, tmp_pathplus  # noqa: F401
@@ -64,6 +63,9 @@ from coincidence.utils import (  # noqa: F401
 		whitespace_perms_list,
 		with_fixed_datetime
 		)
+
+# import sys
+
 
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020-2021 Dominic Davis-Foster"
