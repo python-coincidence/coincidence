@@ -66,7 +66,6 @@ from coincidence.utils import (  # noqa: F401
 
 # import sys
 
-
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2020-2021 Dominic Davis-Foster"
 __license__: str = "MIT License"
