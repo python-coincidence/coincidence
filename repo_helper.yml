@@ -14,7 +14,6 @@ primary_conda_channel: domdfcoding
 conda_channels:
  - conda-forge
 
-mypy_version: "0.910"
 python_deploy_version: 3.6
 min_coverage: 100
 requires_python: 3.6
