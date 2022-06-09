@@ -5,7 +5,7 @@ from typing import Any, List, Tuple
 from sphinx.application import Sphinx
 from sphinx.ext.autodoc import INSTANCEATTR
 from sphinx.util.inspect import safe_getattr
-from sphinx_toolbox.more_autodoc.autoprotocol import ProtocolDocumenter, globally_excluded_methods
+from sphinx_toolbox.more_autodoc.autoprotocol import ProtocolDocumenter
 from sphinx_toolbox.utils import SphinxExtMetadata, allow_subclass_add, filter_members_warning
 
 
@@ -43,7 +43,7 @@ class CoincidenceProtocolDocumenter(ProtocolDocumenter):
 			elif membername in {"_abc_impl", "_is_runtime_protocol"}:
 				keep = False
 
-			elif membername not in globally_excluded_methods:
+			elif membername not in self.globally_excluded_methods:
 				# Magic method you wouldn't overload, or private method.
 				if membername in dir(self.object.__base__):
 					keep = member is not getattr(self.object.__base__, membername)
