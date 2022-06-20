@@ -40,6 +40,7 @@ See `the pytest documentation`_ for more information.
 import datetime
 import os
 from pathlib import Path
+from typing import Iterator
 
 # 3rd party
 import pytest
@@ -82,7 +83,7 @@ def original_datadir(request) -> Path:  # noqa: D103
 
 
 @pytest.fixture()
-def fixed_datetime(monkeypatch):
+def fixed_datetime(monkeypatch) -> Iterator:
 	"""
 	Pytest fixture to pretend the current datetime is 2:20 AM on 13th October 2020.
 

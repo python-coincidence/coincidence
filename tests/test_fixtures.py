@@ -2,6 +2,7 @@
 import datetime
 
 # 3rd party
+import pytest
 from domdf_python_tools.paths import PathPlus
 
 original_datetime = datetime.datetime
@@ -12,7 +13,8 @@ def test_tmp_pathplus(tmp_pathplus: PathPlus):
 	assert tmp_pathplus.exists()
 
 
-def test_fixed_datetime(fixed_datetime):
+@pytest.mark.usefixtures("fixed_datetime")
+def test_fixed_datetime():
 	assert datetime.datetime.today() == datetime.datetime(2020, 10, 13)
 	assert datetime.datetime.now() == datetime.datetime(2020, 10, 13, 2, 20)
 

@@ -87,7 +87,7 @@ try:
 		return dumper.represent_data(data)
 
 	@_representer_for(collections.abc.Sequence, tuple)
-	def _represent_sequences(dumper: RegressionYamlDumper, data):
+	def _represent_sequences(dumper: RegressionYamlDumper, data):  # noqa: MAN001,MAN002
 		if isinstance(data, SupportsAsDict):
 			data = dict(data._asdict())
 		else:
@@ -96,7 +96,7 @@ try:
 		return dumper.represent_data(data)
 
 	@_representer_for(CaptureResult)
-	def _represent_captureresult(dumper: RegressionYamlDumper, data):
+	def _represent_captureresult(dumper: RegressionYamlDumper, data):  # noqa: MAN001,MAN002
 		data = dict(out=data.out.splitlines(), err=data.err.splitlines())
 		return dumper.represent_data(data)
 

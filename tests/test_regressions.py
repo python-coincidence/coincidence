@@ -109,14 +109,14 @@ def test_advanced_data_regression(advanced_data_regression, data):
 	advanced_data_regression.check(data)
 
 
-def test_advanced_data_regression_capsys(advanced_data_regression, capsys):
+def test_advanced_data_regression_capsys(advanced_data_regression: AdvancedFileRegressionFixture, capsys):
 	print("Hello World")
 	print("\t\tBoo!\t\t")
 	print("Trailing whitespace bad        ", file=sys.stderr)
 	advanced_data_regression.check(capsys.readouterr())
 
 
-def test_advanced_data_regression_capsys_nested(advanced_data_regression, capsys):
+def test_advanced_data_regression_capsys_nested(advanced_data_regression: AdvancedFileRegressionFixture, capsys):
 	print("Hello World")
 	print("\t\tBoo!\t\t")
 	print("Trailing whitespace bad        ", file=sys.stderr)
@@ -156,14 +156,14 @@ def test_check_file_regression(tmp_pathplus: PathPlus, file_regression: FileRegr
 
 
 @pytest.mark.parametrize("contents", ["Hello\nWorld", "Hello World", StringList(["Hello", "World"])])
-def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressionFixture, contents):
+def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressionFixture, contents: str):
 	advanced_file_regression.check(contents)
 
 
 @pytest.mark.parametrize("contents", [b"hello world", ("hello world", ), [
 		"hello world",
 		], 12345])
-def test_advanced_file_regression_bad_type(advanced_file_regression: AdvancedFileRegressionFixture, contents):
+def test_advanced_file_regression_bad_type(advanced_file_regression: AdvancedFileRegressionFixture, contents: str):
 	with pytest.raises(TypeError, match="Expected text contents but received type '.*'"):
 		advanced_file_regression.check(contents)
 

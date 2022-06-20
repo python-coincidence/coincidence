@@ -102,7 +102,7 @@ def test_generate_falsy_values():
 				pytest.param(datetime.datetime(2020, 7, 4, 10, 00), datetime.datetime(2020, 7, 4), id='1'),
 				]
 		)
-def test_with_fixed_datetime(fake_datetime, expected_date: datetime.datetime):
+def test_with_fixed_datetime(fake_datetime: datetime.datetime, expected_date: datetime.datetime):
 
 	dt = datetime.datetime(2022, 4, 23, 16, 3, 6)
 	d = datetime.date(2022, 4, 23)

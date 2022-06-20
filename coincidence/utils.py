@@ -80,7 +80,7 @@ def is_docker() -> bool:
 class _DateMeta(type):  # pragma: no cover (PyPy)
 	_date = datetime.date
 
-	def __instancecheck__(self, instance):
+	def __instancecheck__(self, instance):  # noqa: MAN001,MAN002
 		return isinstance(instance, self._date)
 
 
@@ -92,7 +92,7 @@ class _DatetimeMeta(type):  # pragma: no cover (PyPy)
 
 
 @contextmanager
-def with_fixed_datetime(fixed_datetime: datetime.datetime):
+def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 	"""
 	Context manager to set a fixed datetime for the duration of the ``with`` block.
 
