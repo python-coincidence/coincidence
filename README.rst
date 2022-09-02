@@ -58,8 +58,8 @@ coincidence
 	:target: https://github.com/python-coincidence/coincidence/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://dependency-dash.herokuapp.com/github/python-coincidence/coincidence/badge.svg
-	:target: https://dependency-dash.herokuapp.com/github/python-coincidence/coincidence/
+.. |requires| image:: https://dependency-dash.repo-helper.uk/github/python-coincidence/coincidence/badge.svg
+	:target: https://dependency-dash.repo-helper.uk/github/python-coincidence/coincidence/
 	:alt: Requirements Status
 
 .. |coveralls| image:: https://img.shields.io/coveralls/github/python-coincidence/coincidence/master?logo=coveralls
