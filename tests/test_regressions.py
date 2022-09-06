@@ -14,7 +14,7 @@ from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
 # this package
-from coincidence.regressions import AdvancedFileRegressionFixture, check_file_output, check_file_regression
+from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture, check_file_output, check_file_regression
 from coincidence.selectors import not_windows
 
 
@@ -116,7 +116,7 @@ def test_advanced_data_regression_capsys(advanced_data_regression: AdvancedFileR
 	advanced_data_regression.check(capsys.readouterr())
 
 
-def test_advanced_data_regression_capsys_nested(advanced_data_regression: AdvancedFileRegressionFixture, capsys):
+def test_advanced_data_regression_capsys_nested(advanced_data_regression: AdvancedDataRegressionFixture, capsys):
 	print("Hello World")
 	print("\t\tBoo!\t\t")
 	print("Trailing whitespace bad        ", file=sys.stderr)
