@@ -69,16 +69,16 @@ def test_param():
 	assert param("sqrt(9)", 3, key=itemgetter(0)).id == "sqrt(9)"
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
-		param("sqrt(9)", 3, id="√9", key=itemgetter(0))  # type: ignore
+		param("sqrt(9)", 3, id="√9", key=itemgetter(0))  # type: ignore[call-overload]
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
-		param("sqrt(9)", 3, id="√9", idx=0)  # type: ignore
+		param("sqrt(9)", 3, id="√9", idx=0)  # type: ignore[call-overload]
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
-		param("sqrt(9)", 3, idx=0, key=itemgetter(0))  # type: ignore
+		param("sqrt(9)", 3, idx=0, key=itemgetter(0))  # type: ignore[call-overload]
 
 	with pytest.raises(ValueError, match="'id', 'idx' and 'key' are mutually exclusive."):
-		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore
+		param("sqrt(9)", 3, id="√9", idx=0, key=itemgetter(0))  # type: ignore[call-overload]
 
 	assert param(PathPlus("code.py"), key=lambda t: t[0].name).id == "code.py"
 

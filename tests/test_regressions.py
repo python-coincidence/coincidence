@@ -3,7 +3,7 @@ import pathlib
 import sys
 from collections import ChainMap, Counter, OrderedDict, defaultdict, namedtuple
 from types import MappingProxyType
-from typing import Dict, Mapping, NamedTuple, Sequence
+from typing import Any, Dict, Iterator, Mapping, NamedTuple, Sequence
 
 # 3rd party
 import pytest
@@ -45,13 +45,13 @@ class CustomMapping(Mapping):
 	def __init__(self, *args, **kwargs):
 		self._dict = dict(*args, **kwargs)
 
-	def __getitem__(self, item):
+	def __getitem__(self, item):  # noqa: MAN001,MAN002
 		return self._dict[item]
 
-	def __iter__(self):
+	def __iter__(self) -> Iterator:
 		yield from self._dict
 
-	def __len__(self):
+	def __len__(self) -> int:
 		return len(self._dict)
 
 
@@ -60,13 +60,13 @@ class CustomSequence(Sequence):
 	def __init__(self, *args, **kwargs):
 		self._elements = tuple(*args, **kwargs)
 
-	def __getitem__(self, item):
+	def __getitem__(self, item):  # noqa: MAN001,MAN002
 		return self._elements[item]
 
-	def __iter__(self):
+	def __iter__(self) -> Iterator:
 		yield from self._elements
 
-	def __len__(self):
+	def __len__(self) -> int:
 		return len(self._elements)
 
 
@@ -108,7 +108,7 @@ some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
 				pytest.param(PathPlus("/foo/bar/baz"), id="pathplus"),
 				]
 		)
-def test_advanced_data_regression(advanced_data_regression, data):
+def test_advanced_data_regression(advanced_data_regression: AdvancedDataRegressionFixture, data: Any):
 	print(type(data))
 	print(data)
 	advanced_data_regression.check(data)

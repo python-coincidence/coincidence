@@ -37,7 +37,7 @@ import random
 from contextlib import contextmanager
 from functools import lru_cache
 from itertools import chain, permutations
-from typing import Iterable, Iterator, List, Optional, Sequence, TypeVar, Union
+from typing import Any, Iterable, Iterator, List, Optional, Sequence, TypeVar, Union
 
 # 3rd party
 import pytest
@@ -80,14 +80,14 @@ def is_docker() -> bool:
 class _DateMeta(type):  # pragma: no cover (PyPy)
 	_date = datetime.date
 
-	def __instancecheck__(self, instance):  # noqa: MAN001,MAN002
+	def __instancecheck__(self, instance: Any):  # noqa: MAN002
 		return isinstance(instance, self._date)
 
 
 class _DatetimeMeta(type):  # pragma: no cover (PyPy)
 	_datetime = datetime.datetime
 
-	def __instancecheck__(self, instance):
+	def __instancecheck__(self, instance: Any) -> bool:
 		return isinstance(instance, self._datetime)
 
 
@@ -142,7 +142,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 		class D(datetime.date, metaclass=_DateMeta):
 
 			@classmethod
-			def today(cls):
+			def today(cls) -> datetime.date:  # type: ignore[override]
 				return datetime.date(
 						fixed_datetime.year,
 						fixed_datetime.month,
@@ -152,7 +152,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 		class DT(datetime.datetime, metaclass=_DatetimeMeta):
 
 			@classmethod
-			def today(cls):
+			def today(cls) -> datetime.datetime:  # type: ignore[override]
 				return datetime.datetime(
 						fixed_datetime.year,
 						fixed_datetime.month,
@@ -160,7 +160,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 						)
 
 			@classmethod
-			def now(cls, tz: Optional[datetime.tzinfo] = None):
+			def now(cls, tz: Optional[datetime.tzinfo] = None) -> datetime.datetime:  # type: ignore[override]
 				return datetime.datetime.fromtimestamp(fixed_datetime.timestamp())
 
 		D.__name__ = "date"

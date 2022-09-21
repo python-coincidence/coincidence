@@ -37,7 +37,7 @@ from collections import ChainMap, Counter, OrderedDict, defaultdict
 from contextlib import suppress
 from functools import partial
 from types import MappingProxyType
-from typing import Any, Callable, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union, cast
+from typing import Any, Callable, Collection, Dict, Mapping, Optional, Sequence, Type, TypeVar, Union, cast
 
 # 3rd party
 import pytest
@@ -65,7 +65,7 @@ try:
 	# 3rd party
 	from pytest_regressions.data_regression import DataRegressionFixture, RegressionYamlDumper
 
-	def _representer_for(*data_type: Type):
+	def _representer_for(*data_type: Type):  # noqa: MAN002
 
 		def deco(representer_fn: _C) -> _C:
 			for dtype in data_type:
@@ -82,12 +82,12 @@ try:
 			collections.defaultdict,
 			MappingProxyType,
 			)
-	def _represent_mappings(dumper: RegressionYamlDumper, data):
+	def _represent_mappings(dumper: RegressionYamlDumper, data: Mapping):  # noqa: MAN002
 		data = dict(data)
 		return dumper.represent_data(data)
 
 	@_representer_for(collections.abc.Sequence, tuple)
-	def _represent_sequences(dumper: RegressionYamlDumper, data):  # noqa: MAN001,MAN002
+	def _represent_sequences(dumper: RegressionYamlDumper, data: Collection):  # noqa: MAN002
 		if isinstance(data, SupportsAsDict):
 			data = dict(data._asdict())
 		else:
@@ -113,14 +113,14 @@ try:
 			pathlib.Path,
 			PathPlus,
 			)
-	def _represent_pathlib(dumper: RegressionYamlDumper, data: pathlib.PurePath):
+	def _represent_pathlib(dumper: RegressionYamlDumper, data: pathlib.PurePath):  # noqa: MAN002
 		return dumper.represent_str(data.as_posix())
 
 except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
 		raise
 
-	class DataRegressionFixture:  # type: ignore
+	class DataRegressionFixture:  # type: ignore[no-redef]
 		"""
 		Placeholder ``DataRegressionFixture`` for when PyYAML can't be imported.
 		"""
@@ -134,7 +134,7 @@ def check_file_regression(
 		file_regression: FileRegressionFixture,
 		extension: str = ".txt",
 		**kwargs,
-		):
+		) -> bool:
 	r"""
 	Check the given data against that in the reference file.
 
@@ -163,7 +163,7 @@ def check_file_output(
 		extension: Optional[str] = None,
 		newline: Optional[str] = '\n',
 		**kwargs,
-		):
+		) -> bool:
 	r"""
 	Check the content of the given text file against the reference file.
 
@@ -228,7 +228,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 			data_dict: Union[Sequence, SupportsAsDict, Mapping, MappingProxyType, CaptureResult],
 			basename: Optional[str] = None,
 			fullpath: Optional[str] = None,
-			):
+			) -> None:
 		"""
 		Checks ``data`` against a previously recorded version, or generates a new file.
 
@@ -260,7 +260,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 
 
 @pytest.fixture()
-def advanced_data_regression(datadir, original_datadir, request) -> AdvancedDataRegressionFixture:
+def advanced_data_regression(datadir, original_datadir, request) -> AdvancedDataRegressionFixture:  # noqa: MAN001
 	"""
 	Pytest fixture for performing regression tests on lists, dictionaries and namedtuples.
 	"""
@@ -276,7 +276,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 	.. versionadded:: 0.2.0
 	"""  # noqa: D400
 
-	def check(  # type: ignore
+	def check(  # type: ignore[override]
 		self,
 		contents: Union[str, StringList],
 		encoding: Optional[str] = "UTF-8",
@@ -287,7 +287,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		binary: bool = False,
 		obtained_filename: Optional[str] = None,
 		check_fn: Optional[Callable[[Any, Any], Any]] = None,
-		):
+		) -> None:
 		r"""
 		Checks the contents against a previously recorded version, or generates a new file.
 
@@ -310,7 +310,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		if check_fn is None:
 			check_fn = partial(check_text_files, encoding="UTF-8")
 
-		def dump_fn(filename):
+		def dump_fn(filename: PathLike) -> None:
 			PathPlus(filename, newline=newline).write_clean(cast(str, contents))
 
 		perform_regression_check(
@@ -326,7 +326,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 				obtained_filename=obtained_filename,
 				)
 
-	def check_bytes(self, contents: bytes, **kwargs):  # pragma: no cover (Windows)
+	def check_bytes(self, contents: bytes, **kwargs) -> None:  # pragma: no cover (Windows)
 		r"""
 		Checks the bytes contents against a previously recorded version, or generates a new file.
 
@@ -344,7 +344,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 			extension: Optional[str] = None,
 			newline: Optional[str] = '\n',
 			**kwargs,
-			):
+			) -> None:
 		r"""
 		Check the content of the given text file against the reference file.
 
@@ -372,7 +372,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 
 
 @pytest.fixture()
-def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:
+def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFileRegressionFixture:  # noqa: MAN001
 	r"""
 	Pytest fixture for performing regression tests on strings, bytes and files.
 
