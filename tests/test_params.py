@@ -11,22 +11,24 @@ from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.utils import strtobool
 
 # this package
-from coincidence.params import count, param, parametrized_versions, testing_boolean_values, whitespace_perms
+from coincidence.params import count, param, parametrized_versions
+from coincidence.params import testing_boolean_values as boolean_values_for_tests
+from coincidence.params import whitespace_perms
 
 
 def test_testing_boolean_strings():
-	assert isinstance(testing_boolean_values(), MarkDecorator)
-	assert isinstance(testing_boolean_values().mark, Mark)
-	assert "boolean_string, expected_boolean" in testing_boolean_values().mark.args
-	assert testing_boolean_values().mark.args[0] == "boolean_string, expected_boolean"
-	assert len(testing_boolean_values().mark.args[1]) == 28
-	assert isinstance(testing_boolean_values().mark.args[1], list)
-	assert isinstance(testing_boolean_values().mark.args[1][0], tuple)
-	assert len(testing_boolean_values().mark.args[1][0]) == 2
-	assert isinstance(testing_boolean_values().mark.args[1][0][0], bool)
-	assert isinstance(testing_boolean_values().mark.args[1][0][1], bool)
+	assert isinstance(boolean_values_for_tests(), MarkDecorator)
+	assert isinstance(boolean_values_for_tests().mark, Mark)
+	assert "boolean_string, expected_boolean" in boolean_values_for_tests().mark.args
+	assert boolean_values_for_tests().mark.args[0] == "boolean_string, expected_boolean"
+	assert len(boolean_values_for_tests().mark.args[1]) == 28
+	assert isinstance(boolean_values_for_tests().mark.args[1], list)
+	assert isinstance(boolean_values_for_tests().mark.args[1][0], tuple)
+	assert len(boolean_values_for_tests().mark.args[1][0]) == 2
+	assert isinstance(boolean_values_for_tests().mark.args[1][0][0], bool)
+	assert isinstance(boolean_values_for_tests().mark.args[1][0][1], bool)
 
-	for value, expects in testing_boolean_values().mark.args[1]:
+	for value, expects in boolean_values_for_tests().mark.args[1]:
 		assert strtobool(value) is expects
 
 
