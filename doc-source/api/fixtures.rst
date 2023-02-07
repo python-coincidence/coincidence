@@ -2,6 +2,6 @@
 :mod:`coincidence.fixtures`
 =============================
 
-.. autosummary-widths:: 7/16
+.. autosummary-widths:: 35/100
 
 .. automodule:: coincidence.fixtures

@@ -2,6 +2,6 @@
 :mod:`coincidence`
 =====================
 
-.. autosummary-widths:: 1/2
+.. autosummary-widths:: 45/100
 
 .. automodule:: coincidence
