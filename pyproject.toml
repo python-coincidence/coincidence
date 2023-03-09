@@ -77,7 +77,7 @@ extensions = [
     "sphinx_autofixture",
     "internal_autoprotocol",
     "local_extension",
-    "sphinx-favicon",
+    "sphinx_favicon",
     "sphinx_toolbox.latex.succinct_seealso",
     "sphinx_toolbox.more_autosummary.column_widths",
     "sphinx_toolbox_experimental.changelog",
