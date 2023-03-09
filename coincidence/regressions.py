@@ -311,7 +311,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 			check_fn = partial(check_text_files, encoding="UTF-8")
 
 		def dump_fn(filename: PathLike) -> None:
-			PathPlus(filename, newline=newline).write_clean(cast(str, contents))
+			PathPlus(filename).write_clean(cast(str, contents))
 
 		perform_regression_check(
 				datadir=self.datadir,
