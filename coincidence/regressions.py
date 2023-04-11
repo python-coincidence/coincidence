@@ -247,10 +247,10 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 
 		if isinstance(data_dict, (Mapping, OrderedDict, Counter, defaultdict, MappingProxyType, ChainMap)):
 			data_dict = dict(data_dict)
-		elif isinstance(data_dict, SupportsAsDict):
-			data_dict = dict(data_dict._asdict())
 		elif isinstance(data_dict, CaptureResult):
 			data_dict = dict(out=data_dict.out.splitlines(), err=data_dict.err.splitlines())
+		elif isinstance(data_dict, SupportsAsDict):
+			data_dict = dict(data_dict._asdict())
 		elif isinstance(data_dict, Sequence):
 			data_dict = list(data_dict)
 
