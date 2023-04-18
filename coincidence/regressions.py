@@ -3,9 +3,16 @@
 #  regressions.py
 """
 Regression test helpers.
+
+To enable the fixtures in this module add the following to ``conftest.py`` in your test directory:
+
+.. code-block:: python
+
+	pytest_plugins = ("coincidence", )
+
 """
 #
-#  Copyright © 2020-2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
+#  Copyright © 2020-2023 Dominic Davis-Foster <dominic@davis-foster.co.uk>
 #
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
 #  of this software and associated documentation files (the "Software"), to deal
