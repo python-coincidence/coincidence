@@ -13,11 +13,11 @@ from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
 if sys.version_info >= (3, 11):
-    # stdlib
-    import tomllib
+	# 3rd party
+	import tomllib
 else:
-    # 3rd party
-    import tomli as tomllib
+	# 3rd party
+	import tomli as tomllib
 
 # this package
 from coincidence.regressions import (
