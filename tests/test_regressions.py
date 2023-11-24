@@ -12,10 +12,10 @@ from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
 
-if sys.version_info >= (3, 11):
+if sys.version_info >= (3, 11):  # pragma: no cover
 	# 3rd party
 	import tomllib
-else:
+else:  # pragma: no cover
 	# 3rd party
 	import tomli as tomllib
 
