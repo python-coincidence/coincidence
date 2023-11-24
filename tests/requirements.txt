@@ -7,4 +7,4 @@ iniconfig!=1.1.0,>=1.0.1
 pytest-cov>=2.8.1
 pytest-randomly>=3.7.0
 pytest-timeout>=1.4.2
-tomli>=2.0.1; python_version < "3.11"
+tomli>=1.2.3; python_version < "3.11"
