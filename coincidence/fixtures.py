@@ -110,16 +110,14 @@ def fixed_datetime(monkeypatch) -> Iterator:
 				pytest.param(
 						'/',
 						id="forward",
-						marks=pytest.mark.skipif(
-								os.sep == '\\', reason=r"Output differs on platforms where os.sep == '\\'"
-								)
+						marks=pytest.mark.
+						skipif(os.sep == '\\', reason=r"Output differs on platforms where os.sep == '\\'")
 						),
 				pytest.param(
 						'\\',
 						id="backward",
-						marks=pytest.mark.skipif(
-								os.sep == '/', reason="Output differs on platforms where os.sep == '/'"
-								)
+						marks=pytest.mark.
+						skipif(os.sep == '/', reason="Output differs on platforms where os.sep == '/'")
 						),
 				]
 		)
