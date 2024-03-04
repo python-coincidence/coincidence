@@ -105,20 +105,14 @@ def fixed_datetime(monkeypatch) -> Iterator:
 		yield
 
 
+_skip_forward_mark = pytest.mark.skipif(os.sep == '\\', reason=r"Output differs on platforms where os.sep == '\\'")
+_skip_backward_mark = pytest.mark.skipif(os.sep == '/', reason="Output differs on platforms where os.sep == '/'")
+
+
 @pytest.fixture(
 		params=[
-				pytest.param(
-						'/',
-						id="forward",
-						marks=pytest.mark.
-						skipif(os.sep == '\\', reason=r"Output differs on platforms where os.sep == '\\'")
-						),
-				pytest.param(
-						'\\',
-						id="backward",
-						marks=pytest.mark.
-						skipif(os.sep == '/', reason="Output differs on platforms where os.sep == '/'")
-						),
+				pytest.param('/', id="forward", marks=_skip_forward_mark),
+				pytest.param('\\', id="backward", marks=_skip_backward_mark),
 				]
 		)
 def path_separator(request) -> str:
