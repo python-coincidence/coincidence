@@ -4,7 +4,7 @@ build-backend = "whey"
 
 [project]
 name = "coincidence"
-version = "0.6.5"
+version = "0.6.6"
 description = "Helper functions for pytest."
 readme = "README.rst"
 requires-python = ">=3.6"
