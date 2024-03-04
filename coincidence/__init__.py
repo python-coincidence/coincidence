@@ -75,7 +75,7 @@ __email__: str = "dominic@davis-foster.co.uk"
 __all__ = ("pytest_report_header", "PEP_563")
 
 
-def pytest_report_header(config, startdir) -> str:  # noqa: MAN001
+def pytest_report_header(config) -> str:  # noqa: MAN001
 	"""
 	Prints the start time of the pytest session.
 	"""
