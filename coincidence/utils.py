@@ -117,21 +117,17 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 		with pytest.MonkeyPatch.context() as monkeypatch:
 			monkeypatch.setattr(
 					datetime.date,
-					"today",
-					lambda *args: datetime.date(
+					"today", lambda *args: datetime.date(
 							fixed_datetime.year,
 							fixed_datetime.month,
-							fixed_datetime.day,
-							)
+							fixed_datetime.day, )
 					)
 			monkeypatch.setattr(
 					datetime.datetime,
-					"today",
-					lambda *args: datetime.datetime(
+					"today", lambda *args: datetime.datetime(
 							fixed_datetime.year,
 							fixed_datetime.month,
-							fixed_datetime.day,
-							)
+							fixed_datetime.day, )
 					)
 			monkeypatch.setattr(datetime.datetime, "now", lambda *args: fixed_datetime)
 
