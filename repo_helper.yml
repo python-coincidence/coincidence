@@ -15,7 +15,8 @@ conda_channels:
  - conda-forge
 
 min_coverage: 100
-requires_python: 3.6
+mypy_version: 1.16
+python_deploy_version: 3.9
 use_whey: true
 docs_fail_on_warning: true
 
