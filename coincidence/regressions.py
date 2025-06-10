@@ -257,7 +257,7 @@ class AdvancedDataRegressionFixture(DataRegressionFixture):
 		elif isinstance(data_dict, CaptureResult) and isinstance(data_dict.out, str):
 			data_dict = dict(
 					out=data_dict.out.splitlines(),
-					err=data_dict.err.splitlines(),  # type: ignore[attr-defined]
+					err=data_dict.err.splitlines(),
 					)
 		elif isinstance(data_dict, SupportsAsDict):
 			data_dict = dict(data_dict._asdict())
