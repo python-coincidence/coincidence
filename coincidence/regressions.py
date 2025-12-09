@@ -136,6 +136,10 @@ except ImportError as e:  # pragma: no cover
 			raise e
 
 
+# To fix docs. Can't be resolved but doesn't appear in the docs anyway 🤷
+LazyDataDir = Any
+
+
 def check_file_regression(
 		data: Union[str, StringList],
 		file_regression: FileRegressionFixture,
