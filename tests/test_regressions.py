@@ -91,13 +91,16 @@ some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
 				pytest.param(MappingProxyType({'a': 1, 'b': 2, 'c': 3}), id="MappingProxyType"),
 				pytest.param(ChainMap({'a': 1}, {'b': 2}, {'c': 3}), id="ChainMap"),
 				pytest.param(
-						OrderedDict({'a': MappingProxyType({'a': 1})}), id="Nested_OrderedDict_MappingProxyType"
+						OrderedDict({'a': MappingProxyType({'a': 1})}),
+						id="Nested_OrderedDict_MappingProxyType",
 						),
 				pytest.param(
-						OrderedDict({'a': CustomSequence([1, 2, 3])}), id="Nested_OrderedDict_CustomSequence"
+						OrderedDict({'a': CustomSequence([1, 2, 3])}),
+						id="Nested_OrderedDict_CustomSequence",
 						),
 				pytest.param(
-						CustomSequence([MappingProxyType({'a': 1})]), id="Nested_CustomSequence_MappingProxyType"
+						CustomSequence([MappingProxyType({'a': 1})]),
+						id="Nested_CustomSequence_MappingProxyType",
 						),
 				pytest.param(CustomMapping({'a': Count(a=1, b=2, c=3)}), id="Nested_CustomMapping_NamedTuple"),
 				pytest.param(toml.loads(some_toml)["section"]["table"], id="Toml_InlineTableDict"),

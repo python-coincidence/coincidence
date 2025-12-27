@@ -181,7 +181,9 @@ skip a test {why} the current platform is {platform}.
 	only_function.__name__ = only_function.__qualname__ = f"only_{platform.lower()}"
 	only_function.__module__ = module
 	only_function.__doc__ = docstring.format(
-			why="unless", platform=platform, versionadded_string=versionadded_string
+			why="unless",
+			platform=platform,
+			versionadded_string=versionadded_string,
 			)
 
 	return not_function, only_function
@@ -201,7 +203,7 @@ not_macos, only_macos = platform_boolean_factory(condition=sys.platform == "darw
 not_linux, only_linux = platform_boolean_factory(
 		condition=sys.platform == "linux",
 		platform="Linux",
-		versionadded="0.2.0"
+		versionadded="0.2.0",
 		)
 not_linux.__doc__ = f"""\
 {inspect.cleandoc(not_linux.__doc__ or '')}

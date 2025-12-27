@@ -122,7 +122,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 							fixed_datetime.year,
 							fixed_datetime.month,
 							fixed_datetime.day,
-							)
+							),
 					)
 			monkeypatch.setattr(
 					datetime.datetime,
@@ -131,7 +131,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 							fixed_datetime.year,
 							fixed_datetime.month,
 							fixed_datetime.day,
-							)
+							),
 					)
 			monkeypatch.setattr(datetime.datetime, "now", lambda *args: fixed_datetime)
 

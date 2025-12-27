@@ -127,7 +127,7 @@ except ImportError as e:  # pragma: no cover
 	if not str(e).endswith("'yaml'"):
 		raise
 
-	class DataRegressionFixture:  # type: ignore[no-redef]
+	class DataRegressionFixture:  # type: ignore[no-redef]  # noqa: PRM002
 		"""
 		Placeholder ``DataRegressionFixture`` for when PyYAML can't be imported.
 		"""
@@ -290,7 +290,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 	.. versionadded:: 0.2.0
 	"""  # noqa: D400
 
-	def check(  # type: ignore[override]
+	def check(  # type: ignore[override]  # noqa: PRM002
 		self,
 		contents: Union[str, StringList],
 		encoding: Optional[str] = "UTF-8",
