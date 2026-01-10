@@ -7,11 +7,17 @@ from typing import Any, Dict, Iterator, Mapping, NamedTuple, Sequence
 
 # 3rd party
 import pytest
-import toml
 from domdf_python_tools.compat import PYPY37_PLUS
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.stringlist import StringList
 from pytest_regressions.file_regression import FileRegressionFixture
+
+if sys.version_info >= (3, 11):  # pragma: no cover
+	# 3rd party
+	import tomllib
+else:  # pragma: no cover
+	# 3rd party
+	import tomli as tomllib
 
 # this package
 from coincidence.regressions import (
@@ -103,7 +109,7 @@ some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
 						id="Nested_CustomSequence_MappingProxyType",
 						),
 				pytest.param(CustomMapping({'a': Count(a=1, b=2, c=3)}), id="Nested_CustomMapping_NamedTuple"),
-				pytest.param(toml.loads(some_toml)["section"]["table"], id="Toml_InlineTableDict"),
+				pytest.param(tomllib.loads(some_toml)["section"]["table"], id="Toml_InlineTableDict"),
 				pytest.param(pathlib.PurePath("/foo/bar/baz"), id="pathlib_purepath"),
 				pytest.param(pathlib.PurePosixPath("/foo/bar/baz"), id="pathlib_pureposixpath"),
 				pytest.param(pathlib.PureWindowsPath(r"c:\foo\bar\baz"), id="pathlib_purewindowspath"),
