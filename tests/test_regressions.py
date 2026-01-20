@@ -109,7 +109,7 @@ some_toml = "[section]\ntable = {a = 1, b = 2, c = 3}"
 				pytest.param(pathlib.PureWindowsPath(r"c:\foo\bar\baz"), id="pathlib_purewindowspath"),
 				pytest.param(pathlib.Path("/foo/bar/baz"), id="pathlib_path"),
 				pytest.param(PathPlus("/foo/bar/baz"), id="pathplus"),
-				]
+				],
 		)
 def test_advanced_data_regression(advanced_data_regression: AdvancedDataRegressionFixture, data: Any):
 	print(type(data))
@@ -168,9 +168,17 @@ def test_advanced_file_regression(advanced_file_regression: AdvancedFileRegressi
 	advanced_file_regression.check(contents)
 
 
-@pytest.mark.parametrize("contents", [b"hello world", ("hello world", ), [
-		"hello world",
-		], 12345])
+@pytest.mark.parametrize(
+		"contents",
+		[
+				b"hello world",
+				("hello world", ),
+				[
+						"hello world",
+						],
+				12345,
+				],
+		)
 def test_advanced_file_regression_bad_type(advanced_file_regression: AdvancedFileRegressionFixture, contents: str):
 	with pytest.raises(TypeError, match="Expected text contents but received type '.*'"):
 		advanced_file_regression.check(contents)
