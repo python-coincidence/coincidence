@@ -113,7 +113,7 @@ _skip_backward_mark = pytest.mark.skipif(os.sep == '/', reason="Output differs o
 		params=[
 				pytest.param('/', id="forward", marks=_skip_forward_mark),
 				pytest.param('\\', id="backward", marks=_skip_backward_mark),
-				]
+				],
 		)
 def path_separator(request) -> str:
 	r"""

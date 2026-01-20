@@ -166,7 +166,7 @@ skip a test {why} the current platform is {platform}.
 
 {versionadded_string}
 :param reason: The reason to display when skipping.
-"""
+""",
 			)
 
 	if versionadded:

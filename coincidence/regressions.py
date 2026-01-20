@@ -301,7 +301,7 @@ class AdvancedFileRegressionFixture(FileRegressionFixture):
 		binary: bool = False,
 		obtained_filename: Optional[str] = None,
 		check_fn: Optional[Callable[[Any, Any], Any]] = None,
-		) -> None:
+	) -> None:
 		r"""
 		Checks the contents against a previously recorded version, or generates a new file.
 

@@ -42,7 +42,7 @@ def test_max_version():
 				pytest.param((3, 8), marks=only_version(3.8, "Success")),
 				pytest.param((3, 9), marks=only_version(3.9, "Success")),
 				pytest.param((3, 10), marks=only_version(3.10, "Success")),
-				]
+				],
 		)
 def test_only_version(py_version: Tuple[int, int]):
 	if sys.version_info[:2] != py_version:
