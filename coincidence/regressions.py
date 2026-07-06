@@ -391,7 +391,6 @@ def advanced_file_regression(datadir, original_datadir, request) -> AdvancedFile
 	Pytest fixture for performing regression tests on strings, bytes and files.
 
 	.. versionadded:: 0.2.0
-
 	"""
 
 	return AdvancedFileRegressionFixture(datadir, original_datadir, request)
