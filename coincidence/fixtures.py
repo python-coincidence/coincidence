@@ -69,6 +69,7 @@ def tmp_pathplus(tmp_path: Path) -> PathPlus:
 
 		pytest_plugins = ("coincidence", )
 
+
 		def test_something(tmp_pathplus: PathPlus):
 			assert True
 	"""  # noqa: D400
@@ -96,6 +97,7 @@ def fixed_datetime(monkeypatch) -> Iterator:
 		.. code-block:: python
 
 			import datetime
+
 			print(datetime.datetime.now())
 
 		Using ``from datetime import datetime`` won't work.

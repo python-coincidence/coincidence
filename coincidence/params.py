@@ -152,15 +152,18 @@ def param(
 
 	**Examples:**
 
-	.. code-block:: python
+	.. code-block:: python3
 
-		@pytest.mark.parametrize("test_input, expected", [
-			("3+5", 8),
-			param("6*9", 42, marks=pytest.mark.xfail),
-			param("2**2", 4, idx=0),
-			param("3**2", 9, id="3^2"),
-			param("sqrt(9)", 3, key=itemgetter(0)),
-		])
+		@pytest.mark.parametrize(
+				"test_input, expected",
+				[
+						("3+5", 8),
+						param("6*9", 42, marks=pytest.mark.xfail),
+						param("2**2", 4, idx=0),
+						param("3**2", 9, id="3^2"),
+						param("sqrt(9)", 3, key=itemgetter(0)),
+						],
+				)
 		def test_eval(test_input, expected):
 			assert eval (test_input) == expected
 
@@ -201,14 +204,14 @@ def parametrized_versions(
 	.. code-block:: python
 
 		@pytest.mark.parametrize(
-			"version",
-			parametrized_versions(
-				3.6,
-				3.7,
-				3.8,
-				reason="Output differs on each version.",
-				),
-			)
+				"version",
+				parametrized_versions(
+						3.6,
+						3.7,
+						3.8,
+						reason="Output differs on each version.",
+						),
+				)
 		def test_something(version: str):
 			pass
 
@@ -216,15 +219,16 @@ def parametrized_versions(
 	.. code-block:: python
 
 		@pytest.fixture(
-			params=parametrized_versions(
-				3.6,
-				3.7,
-				3.8,
-				reason="Output differs on each version.",
-				),
-			)
+				params=parametrized_versions(
+						3.6,
+						3.7,
+						3.8,
+						reason="Output differs on each version.",
+						),
+				)
 		def version(request):
 			return request.param
+
 
 		def test_something(version: str):
 			pass

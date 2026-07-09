@@ -107,6 +107,7 @@ def with_fixed_datetime(fixed_datetime: datetime.datetime) -> Iterator:
 		.. code-block:: python
 
 			import datetime
+
 			print(datetime.datetime.now())
 
 		Using ``from datetime import datetime`` won't work.
